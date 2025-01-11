@@ -28,7 +28,7 @@
     "lint:lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{js,ts,tsx}": ["eslint --fix", "prettier --write", "git add"]
+    "src/**/*.{js,mjs,cjs,ts,jsx,tsx}": ["eslint --fix", "prettier --write", "git add"]
   },
   "eslintConfig": {
     "extends": [

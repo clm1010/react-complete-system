@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import QuestionCard from './components/QuestionCard'
+import QuestionCard from '@/components/QuestionCard'
 // TS 类型
 const List1: FC = () => {
   const questionList = [
@@ -27,7 +27,7 @@ const List1: FC = () => {
 
   return (
     <div>
-      <h1>问卷列表页</h1>
+      <h1>问卷列表页1</h1>
       <div>
         {questionList.map((question) => {
           // 第二种写法

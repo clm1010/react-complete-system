@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig-extend.json", // 指定扩展的配置的路径
   "compilerOptions": {
     //生成代码的语言版本
     "target": "es5",
@@ -8,7 +9,7 @@
     "allowJs": true,
     //跳过声明文件的类型检查
     "skipLibCheck": true,
-     //es模块，互操作，屏蔽es模块化和commonjs模块化之间的差异
+    //es模块，互操作，屏蔽es模块化和commonjs模块化之间的差异
     "esModuleInterop": true,
     //允许通过import x from 'y',即使模块中没有显式指定default导出
     "allowSyntheticDefaultImports": true,
@@ -29,11 +30,7 @@
     //编译时不产生任何文件(只进行类型检查)
     "noEmit": true,
     //指定jsx编译成什么形式
-    "jsx": "react-jsx",
-    "baseUrl": ".",
-    "paths": {
-      "~@/*": ["src/*"]
-    }
+    "jsx": "react-jsx"
   },
   //指定允许ts处理的目录
   "include": ["src"],

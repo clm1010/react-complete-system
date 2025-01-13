@@ -1,19 +1,38 @@
 import type { FC } from 'react'
-import './QuestionCard.css'
+import '@/components/QuestionCard.css'
 
 // ts 自定义类型
 type PropsType = {
   id: string
   title: string
   isPublished: boolean
+  deleteQuestion?: (id: string) => void
+  publishQuestion?: (id: string) => void
 }
 
 // FC 是 functional component 函数组件
 const QuestionCard: FC<PropsType> = (props) => {
-  const { id, title, isPublished } = props
+  const { id, title, isPublished, deleteQuestion, publishQuestion } = props
+  /**
+   * @description 发布
+   * @param id
+   */
+  const handlerPublish = (id: string) => {
+    console.log('发布', id)
+    if (publishQuestion) {
+      publishQuestion(id)
+    }
+  }
 
-  const handleEdit = (id: string) => {
-    console.log('编辑', id)
+  /**
+   * @description 删除
+   * @param id
+   */
+  const handlerDel = (id: string) => {
+    console.log('删除', id)
+    if (deleteQuestion) {
+      deleteQuestion(id)
+    }
   }
   return (
     <div key={id} className='list-item'>
@@ -26,10 +45,18 @@ const QuestionCard: FC<PropsType> = (props) => {
       &nbsp;
       <button
         onClick={() => {
-          handleEdit(id)
+          handlerPublish(id)
         }}
       >
-        编辑问卷
+        发布问卷
+      </button>
+      &nbsp;
+      <button
+        onClick={() => {
+          handlerDel(id)
+        }}
+      >
+        删除
       </button>
     </div>
   )

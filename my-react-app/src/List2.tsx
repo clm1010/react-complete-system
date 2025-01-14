@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import { useState } from 'react'
 import QuestionCard from '@/components/QuestionCard'
+import { produce } from 'immer'
 
 const List2: FC = () => {
   // 原始数据保存在useState
@@ -32,11 +33,21 @@ const List2: FC = () => {
    */
   const handlerAddClick = () => {
     const ln = Math.random().toString().slice(-3)
+    // setQuestionList(
+    //   questionList.concat({
+    //     id: 'q' + ln,
+    //     title: '问卷' + ln,
+    //     isPublished: false
+    //   })
+    // )
+    // 使用 immer 的写法，操作新增
     setQuestionList(
-      questionList.concat({
-        id: 'q' + ln,
-        title: '问卷' + ln,
-        isPublished: false
+      produce((draft) => {
+        draft.push({
+          id: 'q' + ln,
+          title: '问卷' + ln,
+          isPublished: false
+        })
       })
     )
   }
@@ -46,11 +57,19 @@ const List2: FC = () => {
    * @param id
    */
   const deleteQuestion = (id: string) => {
+    // setQuestionList(
+    //   // 删除 filter 过滤 返回新数组
+    //   questionList.filter((question) => {
+    //     if (question.id === id) return false
+    //     else return true
+    //   })
+    // )
+
+    // 使用 immer 的写法，操作删除
     setQuestionList(
-      // 删除 filter 过滤 返回新数组
-      questionList.filter((question) => {
-        if (question.id === id) return false
-        else return true
+      produce((draft) => {
+        const index = draft.findIndex((q) => q.id === id)
+        draft.splice(index, 1)
       })
     )
   }
@@ -60,11 +79,19 @@ const List2: FC = () => {
    * @param id
    */
   const publishQuestion = (id: string) => {
+    // setQuestionList(
+    //   // 修改用 map，返回新数组
+    //   questionList.map((question) => {
+    //     if (question.id !== id) return question
+    //     return { ...question, isPublished: true }
+    //   })
+    // )
+
+    // 使用 immer 的写法，操作发布
     setQuestionList(
-      // 修改用 map，返回新数组
-      questionList.map((question) => {
-        if (question.id !== id) return question
-        return { ...question, isPublished: true }
+      produce((draft) => {
+        const item = draft.find((q) => q.id === id)
+        if (item) item.isPublished = true
       })
     )
   }

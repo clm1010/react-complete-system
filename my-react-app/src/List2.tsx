@@ -1,9 +1,15 @@
 import type { FC } from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import QuestionCard from '@/components/QuestionCard'
 import { produce } from 'immer'
 
 const List2: FC = () => {
+  useEffect(() => {
+    console.log('加载 ajax 网络请求！')
+  }, [])
+
+  // const [count, setCount] = useState(0)
+
   // 原始数据保存在useState
   const [questionList, setQuestionList] = useState([
     {
@@ -28,10 +34,18 @@ const List2: FC = () => {
     }
   ])
 
+  // useEffect(() => {
+  //   console.log('questionList 发生变化！')
+  // }, [questionList])
+  // useEffect(() => {
+  //   console.log('count 发生变化！')
+  // }, [count])
+
   /**
    * @description 新增问卷
    */
   const handlerAddClick = () => {
+    // setCount(count + 1)
     const ln = Math.random().toString().slice(-3)
     // setQuestionList(
     //   questionList.concat({

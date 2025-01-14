@@ -4,7 +4,8 @@
 // import List2 from '@/List2'
 // import ImmerDemo from '@/ImmerDemo'
 // import UseRefDemo from '@/UseRefDemo'
-import UseMemo from "@/UseMemo"
+// import UseMemo from "@/UseMemo"
+import UseCallbackDemo from '@/UseCallbackDemo'
 
 export default function App() {
   return (
@@ -15,7 +16,8 @@ export default function App() {
       {/* <List2 /> */}
       {/* <ImmerDemo /> */}
       {/* <UseRefDemo /> */}
-      <UseMemo />
+      {/* <UseMemo /> */}
+      <UseCallbackDemo />
     </>
   )
 }

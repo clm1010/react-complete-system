@@ -3,7 +3,8 @@
 // import StateDemo2 from '@/StateDemo2'
 // import List2 from '@/List2'
 // import ImmerDemo from '@/ImmerDemo'
-import UseRefDemo from '@/UseRefDemo'
+// import UseRefDemo from '@/UseRefDemo'
+import UseMemo from "@/UseMemo"
 
 export default function App() {
   return (
@@ -13,7 +14,8 @@ export default function App() {
       {/* <StateDemo2 /> */}
       {/* <List2 /> */}
       {/* <ImmerDemo /> */}
-      <UseRefDemo />
+      {/* <UseRefDemo /> */}
+      <UseMemo />
     </>
   )
 }

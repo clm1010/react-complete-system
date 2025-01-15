@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import { useState, useEffect } from 'react'
-import QuestionCard from '@/components/QuestionCard'
+import QuestionCard from './components/QuestionCard'
 import { produce } from 'immer'
 
 const List2: FC = () => {

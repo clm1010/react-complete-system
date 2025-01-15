@@ -4,6 +4,7 @@ import QuestionCard from '@/components/QuestionCard'
 import { produce } from 'immer'
 
 const List2: FC = () => {
+  // 组件初次渲染之后，useEffect 执行内部函数
   useEffect(() => {
     console.log('加载 ajax 网络请求！')
   }, [])

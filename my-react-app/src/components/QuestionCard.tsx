@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import { useEffect } from 'react'
+import classnames from 'classnames'
 import '@/components/QuestionCard.css'
 
 // ts 自定义类型
@@ -44,8 +45,21 @@ const QuestionCard: FC<PropsType> = (props) => {
     }
   }, [])
 
+  // let itemClassName = 'list-item'
+  // if (isPublished) itemClassName += ' published'
+
+  // classnames 条件判断的使用
+  // 第一种写法
+  // const itemClassName = classnames('list-item', { published: isPublished })
+
+  // 第二种写法
+  const itemClassName = classnames({
+    'list-item': true,
+    published: isPublished
+  })
+
   return (
-    <div key={id} className='list-item'>
+    <div key={id} className={itemClassName}>
       <strong>{title}</strong>&nbsp;
       {isPublished ? (
         <span style={{ color: 'green' }}>已发布</span>

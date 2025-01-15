@@ -2,7 +2,7 @@
 // import List1 from '@/List1'
 // import StateDemo1 from '@/StateDemo1'
 // import StateDemo2 from '@/StateDemo2'
-// import List2 from '@/List2'
+import List2 from '@/List2'
 // import ImmerDemo from '@/ImmerDemo'
 // import UseRefDemo from '@/UseRefDemo'
 // import UseMemo from "@/UseMemo"
@@ -16,7 +16,7 @@
 // 第三方hooks
 // import { useTitle, useMouse } from 'ahooks'
 
-import ClosureTrap from '@/ClosureTrap'
+// import ClosureTrap from '@/ClosureTrap'
 
 export default function App() {
   // useTitle('my-react-app') // 内置 hook - 自定义 hook
@@ -29,7 +29,7 @@ export default function App() {
   // const mouse = useMouse()
   return (
     <>
-      <p>my-react-app</p>
+      {/* <p>my-react-app</p> */}
       {/* <p>
         X:{x} - Y:{y}
       </p> */}
@@ -37,7 +37,7 @@ export default function App() {
       {/* <List1 /> */}
       {/* <StateDemo1 /> */}
       {/* <StateDemo2 /> */}
-      {/* <List2 /> */}
+      <List2 />
       {/* <ImmerDemo /> */}
       {/* <UseRefDemo /> */}
       {/* <UseMemo /> */}
@@ -57,7 +57,7 @@ export default function App() {
       </div> */}
 
       {/* 闭包陷阱 */}
-      <ClosureTrap />
+      {/* <ClosureTrap /> */}
     </>
   )
 }

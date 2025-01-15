@@ -14,7 +14,9 @@
 // import useGetInfo from '@/hooks/useGetInfo' // 自定义 - 模拟获取数据 hook
 
 // 第三方hooks
-import { useTitle, useMouse } from 'ahooks'
+// import { useTitle, useMouse } from 'ahooks'
+
+import ClosureTrap from '@/ClosureTrap'
 
 export default function App() {
   // useTitle('my-react-app') // 内置 hook - 自定义 hook
@@ -23,8 +25,8 @@ export default function App() {
   // const { loading, info } = useGetInfo() // 自定义 hook - useGetInfo()模拟获取数据
 
   // 第三方hooks
-  useTitle('react-title')
-  const mouse = useMouse()
+  // useTitle('react-title')
+  // const mouse = useMouse()
   return (
     <>
       <p>my-react-app</p>
@@ -42,7 +44,7 @@ export default function App() {
       {/* <UseCallbackDemo /> */}
 
       {/* 第三方hooks */}
-      <div>
+      {/* <div>
         <p>
           Client - x:{mouse.clientX}, y: {mouse.clientY}
         </p>
@@ -52,7 +54,10 @@ export default function App() {
         <p>
           Screen - x:{mouse.screenX}, y: {mouse.screenY}
         </p>
-      </div>
+      </div> */}
+
+      {/* 闭包陷阱 */}
+      <ClosureTrap />
     </>
   )
 }

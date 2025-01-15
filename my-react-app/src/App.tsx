@@ -1,22 +1,26 @@
 // import { useEffect } from 'react'
-// import List1 from '@/List1'
-// import StateDemo1 from '@/StateDemo1'
-// import StateDemo2 from '@/StateDemo2'
-// import List2 from '@/List2'
-// import ImmerDemo from '@/ImmerDemo'
-// import UseRefDemo from '@/UseRefDemo'
-// import UseMemo from "@/UseMemo"
-// import UseCallbackD emo from '@/UseCallbackDemo'
+// import List1 from './List1'
+// import StateDemo1 from './StateDemo1'
+// import StateDemo2 from './StateDemo2'
+// import List2 from './List2'
+// import ImmerDemo from './ImmerDemo'
+// import UseRefDemo from './UseRefDemo'
+// import UseMemo from "./UseMemo"
+// import UseCallbackD emo from './UseCallbackDemo'
 
 // 自定义hooks
-// import useTitle from '@/hooks/useTitle' // 自定义 - 修改网页标题 hook
-// import useMouse from '@/hooks/useMouse' // 自定义 - 获取鼠标位置 hook
-// import useGetInfo from '@/hooks/useGetInfo' // 自定义 - 模拟获取数据 hook
+// import useTitle from './hooks/useTitle' // 自定义 - 修改网页标题 hook
+// import useMouse from './hooks/useMouse' // 自定义 - 获取鼠标位置 hook
+// import useGetInfo from './hooks/useGetInfo' // 自定义 - 模拟获取数据 hook
 
 // 第三方hooks
 // import { useTitle, useMouse } from 'ahooks'
 
-import ClosureTrap from '@/ClosureTrap'
+// 闭包陷阱
+// import ClosureTrap from './ClosureTrap'
+
+// CSS 样式
+import StyledComponentsDemo from './StyledComponentsDemo'
 
 export default function App() {
   // useTitle('my-react-app') // 内置 hook - 自定义 hook
@@ -29,7 +33,7 @@ export default function App() {
   // const mouse = useMouse()
   return (
     <>
-      <p>my-react-app</p>
+      {/* <p>my-react-app</p> */}
       {/* <p>
         X:{x} - Y:{y}
       </p> */}
@@ -57,7 +61,10 @@ export default function App() {
       </div> */}
 
       {/* 闭包陷阱 */}
-      <ClosureTrap />
+      {/* <ClosureTrap /> */}
+
+      {/* CSS 样式 */}
+      <StyledComponentsDemo />
     </>
   )
 }

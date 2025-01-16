@@ -1,24 +1,40 @@
-import { FC } from 'react'
-import styled from 'styled-components'
+import type { FC } from 'react'
+import styled, { css } from 'styled-components'
+
+// 定义 Button 的类型
+type ButtonPropsType = {
+  primary?: boolean
+}
+
+// Button 组件
+const Button = styled.button<ButtonPropsType>`
+  background: transparent;
+  border-radius: 3px;
+  border: 2px solid palevioletred;
+  color: palevioletred;
+  margin: 0 1em;
+  padding: 0.25em 1em;
+
+  ${(props: ButtonPropsType) =>
+    props.primary &&
+    css`
+      background: palevioletred;
+      color: white;
+    `}
+`
+// Container 组件
+const Container = styled.div`
+  text-align: center;
+`
+
 const StyledComponentsDemo: FC = () => {
-  const Button = styled.button`
-    color: #bf4f74;
-    font-size: 1em;
-    margin: 1em;
-    padding: 0.25em 1em;
-    border: 2px solid #bf4f74;
-    border-radius: 3px;
-  `
-
-  const TomatoButton = styled(Button)`
-    color: tomato;
-    border-color: tomato;
-  `
-
   return (
     <div>
       <p>styled-components</p>
-      <TomatoButton>Tomato Button</TomatoButton>
+      <Container>
+        <Button>Normal Button</Button>
+        <Button primary>primary Button</Button>
+      </Container>
     </div>
   )
 }

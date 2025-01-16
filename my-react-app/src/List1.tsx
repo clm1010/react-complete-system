@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import QuestionCard from '@/components/QuestionCard'
+import QuestionCard from './components/QuestionCard'
 // TS 类型
 const List1: FC = () => {
   const questionList = [

@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig-extend.json", // 指定扩展的配置的路径
+  // "extends": "./tsconfig-extend.json", // 指定扩展的配置的路径
   "compilerOptions": {
     //生成代码的语言版本
     "target": "es5",

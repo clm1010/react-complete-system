@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import { useEffect } from 'react'
-import '@/components/QuestionCard.css'
+import './components/QuestionCard.css'
 
 // ts 自定义类型
 type PropsType = {

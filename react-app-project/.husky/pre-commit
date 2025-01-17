@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-# export PATH="$PATH:./node_modules/.bin"
-# lint-staged --debug
-npm run lint
-npm run format
-git add .

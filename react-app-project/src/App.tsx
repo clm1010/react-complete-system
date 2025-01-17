@@ -1,4 +1,4 @@
-import List from './pages/List'
+import List from './pages/manage/List'
 export default function App() {
 	return (
 		<div className="App">

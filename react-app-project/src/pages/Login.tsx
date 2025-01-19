@@ -1,8 +1,18 @@
 import type { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 const Login: FC = () => {
+	// 第三方hook
+	const nav = useNavigate()
+
+	// 路由跳转
+	const handlerClick = () => {
+		nav(-1)
+	}
+
 	return (
 		<div>
-			<h1>Login</h1>
+			<button onClick={handlerClick}>返回</button>
 		</div>
 	)
 }

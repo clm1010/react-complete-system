@@ -1,7 +1,8 @@
 import type { FC } from 'react'
 import { useState } from 'react'
-import QuestionCard from '../../components/QuestionCard'
-import styles from './List.module.scss'
+// import { useSearchParams } from 'react-router-dom'
+import QuestionCard from '../../components/QuestionCard/QuestionCard'
+import styles from './common.module.scss'
 
 const rawQuestionList = [
 	{
@@ -16,7 +17,7 @@ const rawQuestionList = [
 		_id: 'q2',
 		title: '问卷2',
 		isPublished: true,
-		isStar: false,
+		isStar: true,
 		answerCount: 5,
 		createdAt: '5月11日 13:23'
 	},
@@ -32,13 +33,16 @@ const rawQuestionList = [
 		_id: 'q4',
 		title: '问卷4',
 		isPublished: true,
-		isStar: false,
+		isStar: true,
 		answerCount: 5,
 		createdAt: '5月13日 13:23'
 	}
 ]
 
 const List: FC = () => {
+	// const [searchParams] = useSearchParams()
+	// console.log('keyword', searchParams.get('keyword'))
+
 	const [questionList, setQuestionList] = useState(rawQuestionList)
 
 	return (
@@ -50,23 +54,24 @@ const List: FC = () => {
 				<div className={styles.right}>(搜索)</div>
 			</div>
 			<div className={styles.content}>
-				{questionList.map((question) => {
-					const { _id } = question
-					return (
-						<QuestionCard
-							key={_id}
-							// {...question} 也可以这么写，解构
-							_id={question._id}
-							title={question.title}
-							isPublished={question.isPublished}
-							isStar={question.isStar}
-							answerCount={question.answerCount}
-							createdAt={question.createdAt}
-						/>
-					)
-				})}
+				{questionList.length > 0 &&
+					questionList.map((question) => {
+						const { _id } = question
+						return (
+							<QuestionCard
+								key={_id}
+								// {...question} 也可以这么写，解构
+								_id={question._id}
+								title={question.title}
+								isPublished={question.isPublished}
+								isStar={question.isStar}
+								answerCount={question.answerCount}
+								createdAt={question.createdAt}
+							/>
+						)
+					})}
 			</div>
-			<div className={styles.footer}>footer</div>
+			<div className={styles.footer}>loadMore 上划加载更多...</div>
 		</>
 	)
 }

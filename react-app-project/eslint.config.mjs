@@ -22,7 +22,7 @@ export default [
   eslintPluginPrettierRecommended,
   {
     rules: {
-      'no-console': 'error'
+      'no-console': 'warn'
     }
   }
 ]

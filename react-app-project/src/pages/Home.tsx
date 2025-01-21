@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import { useNavigate } from 'react-router'
+import { useTitle } from 'ahooks'
 import { MANAGE_INDEX_PATHNAME } from '../router'
 import { Button, Typography } from 'antd'
 import styles from './Home.module.scss'
@@ -7,6 +8,7 @@ import styles from './Home.module.scss'
 const { Title, Paragraph } = Typography
 
 const Home: FC = () => {
+	useTitle('我的问卷')
 	// 第三方hook
 	const nav = useNavigate()
 

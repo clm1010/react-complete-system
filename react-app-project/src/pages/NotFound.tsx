@@ -1,9 +1,12 @@
 import type { FC } from 'react'
 import { useNavigate } from 'react-router'
+import { useTitle } from 'ahooks'
 import { Button, Result } from 'antd'
 import { MANAGE_INDEX_PATHNAME } from '../router'
 
 const NotFound: FC = () => {
+	useTitle('404')
+
 	const nav = useNavigate()
 	return (
 		<Result

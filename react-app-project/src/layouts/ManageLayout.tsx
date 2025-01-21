@@ -34,7 +34,7 @@ const ManageLayout: FC = () => {
 						icon={<StarOutlined />}
 						onClick={() => nav('/manage/star')}
 					>
-						星标问卷
+						标星问卷
 					</Button>
 					<Button
 						type={pathname.startsWith('/manage/trash') ? 'default' : 'text'}

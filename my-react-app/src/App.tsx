@@ -1,4 +1,6 @@
 // import { useEffect } from 'react'
+
+import FormElemsDemo from './FormElemsDemo'
 // import List1 from './List1'
 // import StateDemo1 from './StateDemo1'
 // import StateDemo2 from './StateDemo2'
@@ -20,7 +22,7 @@
 // import ClosureTrap from './ClosureTrap'
 
 // CSS 样式
-import StyledComponentsDemo from './StyledComponentsDemo'
+// import StyledComponentsDemo from './StyledComponentsDemo'
 
 export default function App() {
   // useTitle('my-react-app') // 内置 hook - 自定义 hook
@@ -31,8 +33,10 @@ export default function App() {
   // 第三方hooks
   // useTitle('react-title')
   // const mouse = useMouse()
+
   return (
     <>
+      <h1>App Page</h1>
       {/* <p>my-react-app</p> */}
       {/* <p>
         X:{x} - Y:{y}
@@ -64,7 +68,9 @@ export default function App() {
       {/* <ClosureTrap /> */}
 
       {/* CSS 样式 */}
-      <StyledComponentsDemo />
+      {/* <StyledComponentsDemo /> */}
+
+      <FormElemsDemo />
     </>
   )
 }

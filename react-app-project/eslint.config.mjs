@@ -22,7 +22,8 @@ export default [
 	eslintPluginPrettierRecommended,
 	{
 		rules: {
-			'no-console': 'warn'
+			'no-console': 'warn',
+			'@typescript-eslint/no-explicit-any': 'warn'
 		}
 	}
 ]

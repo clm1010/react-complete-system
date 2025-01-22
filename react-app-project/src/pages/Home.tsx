@@ -1,4 +1,4 @@
-import type { FC } from 'react'
+import { type FC } from 'react'
 import { useNavigate } from 'react-router'
 import { useTitle } from 'ahooks'
 import { MANAGE_INDEX_PATHNAME } from '../router'
@@ -20,6 +20,15 @@ const Home: FC = () => {
 	// 		search: '?b=2'
 	// 	})
 	// }
+	// useEffect(() => {
+	// 	fetch('/api/test')
+	// 		.then((res) => {
+	// 			return res.json()
+	// 		})
+	// 		.then((data) => {
+	// 			console.log('fetch data', data)
+	// 		})
+	// }, [])
 
 	return (
 		<div className={styles.container}>

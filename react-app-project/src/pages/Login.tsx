@@ -53,7 +53,7 @@ const Login: FC = () => {
 			form.setFieldsValue({ username, password })
 			onFinish({ username, password, remember: true })
 		}
-	}, [])
+	}, []) // eslint-disable-line
 
 	/**
 	 * @description 表单提交 登录

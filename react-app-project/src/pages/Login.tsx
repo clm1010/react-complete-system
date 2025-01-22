@@ -11,16 +11,30 @@ const { Title } = Typography
 const USERNAME_KEY = 'USERNAME'
 const PASSWORD_KEY = 'PASSWORD'
 
+/**
+ * @description 将用户名和密码存储在本地存储中
+ * @param username - 要记住的用户名
+ * @param password - 要记住的密码
+ */
 const rememberUser = (username: string, password: string) => {
 	localStorage.setItem(USERNAME_KEY, username)
 	localStorage.setItem(PASSWORD_KEY, password)
 }
 
+/**
+ * @description 从本地存储中删除用户名和密码
+ * @param username - 要删除的用户名
+ * @param password - 要删除的密码
+ */
 const deleteUserFromStorage = () => {
 	localStorage.removeItem(USERNAME_KEY)
 	localStorage.removeItem(PASSWORD_KEY)
 }
 
+/**
+ * @description 从本地存储中获取用户名和密码
+ * @returns {username: string, password: string}
+ */
 const getUserInfoFromStorage = () => {
 	const username = localStorage.getItem(USERNAME_KEY)
 	const password = localStorage.getItem(PASSWORD_KEY)
@@ -32,6 +46,7 @@ const Login: FC = () => {
 
 	const [form] = Form.useForm() // useForm 第三方 hook
 
+	// 从本地存储中获取用户名和密码
 	useEffect(() => {
 		const { username, password } = getUserInfoFromStorage()
 		if (username && password) {
@@ -72,10 +87,33 @@ const Login: FC = () => {
 					initialValues={{ remember: true }}
 					form={form}
 				>
-					<Form.Item label="用户名 " name="username">
+					<Form.Item
+						label="用户名 "
+						name="username"
+						rules={[
+							{
+								required: true,
+								message: '请输入用户名'
+							},
+							{
+								type: 'string',
+								min: 3,
+								max: 20,
+								message: '用户名长度为3-20个字符'
+							},
+							{
+								pattern: /^[a-zA-Z0-9_]{3,20}$/,
+								message: '用户名只能包含字母、数字、下划线'
+							}
+						]}
+					>
 						<Input placeholder="请输入用户名" allowClear />
 					</Form.Item>
-					<Form.Item label="密码" name="password">
+					<Form.Item
+						label="密码"
+						name="password"
+						rules={[{ required: true, message: '请输入密码' }]}
+					>
 						<Input.Password placeholder="请输入密码" allowClear />
 					</Form.Item>
 					<Form.Item wrapperCol={{ offset: 6, span: 20 }} valuePropName="checked" name="remember">

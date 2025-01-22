@@ -10,6 +10,9 @@ const { Title } = Typography
 const Register: FC = () => {
 	useTitle('注册')
 
+	// const [form] = Form.useForm() // useForm 第三方 hook
+
+	// 表单提交
 	const onFinish = (values: {
 		nickname: string
 		username: string
@@ -39,13 +42,51 @@ const Register: FC = () => {
 					<Form.Item label="昵称" name="nickname">
 						<Input placeholder="请输入昵称" allowClear />
 					</Form.Item>
-					<Form.Item label="用户名" name="username">
+					<Form.Item
+						label="用户名"
+						name="username"
+						rules={[
+							{
+								required: true,
+								message: '请输入用户名'
+							},
+							{
+								type: 'string',
+								min: 3,
+								max: 20,
+								message: '用户名长度为3-20个字符'
+							},
+							{
+								pattern: /^[a-zA-Z0-9_]{3,20}$/,
+								message: '用户名只能包含字母、数字、下划线'
+							}
+						]}
+					>
 						<Input placeholder="请输入用户名" allowClear />
 					</Form.Item>
-					<Form.Item label="密码" name="password">
+					<Form.Item
+						label="密码"
+						name="password"
+						rules={[{ required: true, message: '请输入密码' }]}
+					>
 						<Input.Password placeholder="请输入密码" allowClear />
 					</Form.Item>
-					<Form.Item label="确认密码" name="confirmPassword">
+					<Form.Item
+						label="确认密码"
+						name="confirmPassword"
+						dependencies={['password']} // 依赖 password，如果 password 变化了就会触发 validator 验证
+						rules={[
+							{ required: true, message: '请输入密码' },
+							({ getFieldValue }) => ({
+								validator(_, value) {
+									if (!value || getFieldValue('password') === value) {
+										return Promise.resolve()
+									}
+									return Promise.reject(new Error('两次密码不一致'))
+								}
+							})
+						]}
+					>
 						<Input.Password placeholder="请输入确认密码" allowClear />
 					</Form.Item>
 					<Form.Item wrapperCol={{ offset: 6, span: 20 }}>

@@ -1,6 +1,9 @@
 // import { useEffect } from 'react'
 
-import FormElemsDemo from './FormElemsDemo'
+// import ReactHookFormDemo from './ReactHookFormDemo'
+import ReactFormikDemo from './ReactFormikDemo'
+
+// import FormElemsDemo from './FormElemsDemo'
 // import List1 from './List1'
 // import StateDemo1 from './StateDemo1'
 // import StateDemo2 from './StateDemo2'
@@ -70,7 +73,11 @@ export default function App() {
       {/* CSS 样式 */}
       {/* <StyledComponentsDemo /> */}
 
-      <FormElemsDemo />
+      {/* <FormElemsDemo /> */}
+
+      {/* 第三方hooks - 表单校验 */}
+      {/* <ReactHookFormDemo /> */}
+      <ReactFormikDemo />
     </>
   )
 }

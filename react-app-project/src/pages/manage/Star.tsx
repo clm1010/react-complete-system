@@ -1,44 +1,36 @@
 import type { FC } from 'react'
-import { useState } from 'react'
 import { useTitle } from 'ahooks'
-// import { useSearchParams } from 'react-router-dom'
-import { Typography, Empty } from 'antd'
+import useLoadQuestionListData from '../../hooks/useLoadQuestionListData'
+import { Typography, Empty, Spin } from 'antd'
 import QuestionCard from '../../components/QuestionCard/QuestionCard'
 import ListSearch from '../../components/ListSearch/ListSearch'
 import styles from './common.module.scss'
 
 const { Title } = Typography
 
-const rawQuestionList = [
-	{
-		_id: 'q1',
-		title: '问卷1',
-		isPublished: false,
-		isStar: true,
-		answerCount: 3,
-		createdAt: '5月10日 13:23'
-	},
-	{
-		_id: 'q2',
-		title: '问卷2',
-		isPublished: true,
-		isStar: true,
-		answerCount: 5,
-		createdAt: '5月11日 13:23'
-	},
-	{
-		_id: 'q3',
-		title: '问卷3',
-		isPublished: false,
-		isStar: true,
-		answerCount: 6,
-		createdAt: '5月12日 13:23'
-	}
-]
+type questionListType = {
+	_id: string
+	title: string
+	isPublished: boolean
+	isStar: boolean
+	answerCount: number
+	createdAt: string
+}
+
+const contentStyle: React.CSSProperties = {
+	padding: 50,
+	background: 'rgba(0, 0, 0, 0.05)',
+	borderRadius: 4
+}
+
+const content = <div style={contentStyle} />
 
 const Star: FC = () => {
 	useTitle('我的问卷 - 标星问卷')
-	const [questionList, setQuestionList] = useState(rawQuestionList)
+
+	// 使用自定义 hooks 获取数据
+	const { loading, data = {} } = useLoadQuestionListData({ isStar: true })
+	const { list = [], total = 0 } = data
 
 	return (
 		<>
@@ -51,15 +43,22 @@ const Star: FC = () => {
 				</div>
 			</div>
 			<div className={styles.content}>
-				{questionList.length === 0 && (
+				{loading && (
+					<Spin tip="加载中..." size="large">
+						{content}
+					</Spin>
+				)}
+				{!loading && list.length === 0 && (
 					<Empty
 						image={Empty.PRESENTED_IMAGE_DEFAULT}
 						styles={{ image: { height: 100 } }}
 						description={<Typography.Text>暂无标星问卷</Typography.Text>}
 					></Empty>
 				)}
-				{questionList.length > 0 &&
-					questionList.map((question) => {
+				{/* 问卷列表 */}
+				{!loading &&
+					list.length > 0 &&
+					list.map((question: questionListType) => {
 						const { _id } = question
 						return (
 							<QuestionCard
@@ -75,7 +74,7 @@ const Star: FC = () => {
 						)
 					})}
 			</div>
-			<div className={styles.footer}>分页</div>
+			{!loading && list.length > 0 && <div className={styles.footer}>分页</div>}
 		</>
 	)
 }

@@ -1,9 +1,10 @@
 import type { FC } from 'react'
-import { useState } from 'react'
+// import { useState } from 'react'
 import { MANAGE_INDEX_PATHNAME } from '../router'
 import { Outlet, useNavigate, useLocation } from 'react-router'
 import { Button, Space, Divider, message } from 'antd'
 import { PlusOutlined, BarsOutlined, StarOutlined, DeleteOutlined } from '@ant-design/icons'
+import { useRequest } from 'ahooks'
 import { createQuestionService } from '../services/question'
 import styles from './ManageLayout.module.scss'
 
@@ -14,20 +15,36 @@ const ManageLayout: FC = () => {
 	const nav = useNavigate()
 	const { pathname } = useLocation()
 
-	// 创建问卷 loading
-	const [loading, setLoading] = useState(false)
+	// // 创建问卷 loading
+	// const [loading, setLoading] = useState(false)
 
-	// 创建问卷
-	const handleCreateQuestion = async () => {
-		setLoading(true)
-		const data = await createQuestionService()
-		const { id } = data || {}
-		if (id) {
-			nav(`/question/edit/${id}`)
-			message.success('创建成功')
+	// // 创建问卷
+	// const handleCreateQuestion = async () => {
+	// 	setLoading(true)
+	// 	const data = await createQuestionService()
+	// 	const { id } = data || {}
+	// 	if (id) {
+	// 		nav(`/question/edit/${id}`)
+	// 		message.success('创建成功')
+	// 	}
+	// 	setLoading(false)
+	// }
+
+	// 使用 ahooks useRequest 创建问卷
+	const {
+		loading,
+		// error,
+		run: handleCreateQuestion
+	} = useRequest(createQuestionService, {
+		manual: true, // 手动触发
+		onSuccess: (data) => {
+			const { id } = data || {}
+			if (id) {
+				nav(`/question/edit/${id}`)
+				message.success('创建成功')
+			}
 		}
-		setLoading(false)
-	}
+	})
 
 	return (
 		<div className={styles.container}>

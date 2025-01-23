@@ -1,6 +1,12 @@
 import axios from './ajax'
 import type { ResDataType } from './ajax'
 
+type SearchOption = {
+	keyword: string
+	isStar: boolean
+	isDeleted: boolean
+}
+
 /**
  * @description 获取单个问卷
  * @method get
@@ -21,5 +27,20 @@ export async function getQuestionService(id: string): Promise<ResDataType> {
 export async function createQuestionService(): Promise<ResDataType> {
 	const url = '/api/question'
 	const data = (await axios.post(url)) as ResDataType
+	return data
+}
+
+/**
+ * @description 获取问卷列表
+ * @method get
+ * @param opt 查询参数
+ * @param opt: Partial 表示满足一部分类型就可以
+ * @returns 返回问卷列表data
+ */
+export async function getQuestionListService(
+	opt: Partial<SearchOption> = {}
+): Promise<ResDataType> {
+	const url = '/api/question'
+	const data = (await axios.get(url, { params: opt })) as ResDataType
 	return data
 }

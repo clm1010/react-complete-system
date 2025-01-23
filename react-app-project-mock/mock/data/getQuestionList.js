@@ -7,7 +7,11 @@ const Mock = require('mockjs')
 const Random = Mock.Random
 
 const getQuestionList = (opt = {}) => {
-  const { len = 10, isStar = false, isDeleted = false } = opt
+  const {
+    len = 10,
+    isStar = false,
+    isDeleted = false
+  } = opt
   const list = []
   for (let i = 0; i < len; i++) {
     list.push({

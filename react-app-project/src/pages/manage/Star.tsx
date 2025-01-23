@@ -4,6 +4,7 @@ import useLoadQuestionListData from '../../hooks/useLoadQuestionListData'
 import { Typography, Empty, Spin } from 'antd'
 import QuestionCard from '../../components/QuestionCard/QuestionCard'
 import ListSearch from '../../components/ListSearch/ListSearch'
+import ListPage from '../../components/ListPage/ListPage'
 import styles from './common.module.scss'
 
 const { Title } = Typography
@@ -74,7 +75,11 @@ const Star: FC = () => {
 						)
 					})}
 			</div>
-			{!loading && list.length > 0 && <div className={styles.footer}>分页</div>}
+			{!loading && list.length > 0 && (
+				<div className={styles.footer}>
+					<ListPage total={total} />
+				</div>
+			)}
 		</>
 	)
 }

@@ -23,7 +23,8 @@ export default [
 	{
 		rules: {
 			'no-console': 'warn',
-			'@typescript-eslint/no-explicit-any': 'warn'
+			'@typescript-eslint/no-explicit-any': 'warn',
+			'jsx-a11y/anchor-is-valid': 'off'
 		}
 	}
 ]

@@ -5,6 +5,7 @@ import useLoadQuestionListData from '../../hooks/useLoadQuestionListData'
 import { Typography, Empty, Table, Tag, Button, Space, Modal, Spin } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import ListSearch from '../../components/ListSearch/ListSearch'
+import ListPage from '../../components/ListPage/ListPage'
 import styles from './common.module.scss'
 
 const { Title } = Typography
@@ -150,7 +151,11 @@ const Trash: FC = () => {
 				{/* 问卷列表 */}
 				{!loading && list.length > 0 && TableElem}
 			</div>
-			{!loading && list.length > 0 && <div className={styles.footer}>分页</div>}
+			{!loading && list.length > 0 && (
+				<div className={styles.footer}>
+					<ListPage total={total} />
+				</div>
+			)}
 		</>
 	)
 }

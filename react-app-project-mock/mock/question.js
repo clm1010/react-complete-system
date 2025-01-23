@@ -43,14 +43,16 @@ module.exports = [
       // const isDeleted = url.indexOf('isDeleted=true') >= 0
       // console.log(isDeleted)
 
-      const { keyword, isStar, isDeleted } = query
-      console.log(keyword, 'keyword')
-      console.log(isStar, 'isStar')
-      console.log(isDeleted, 'isDeleted')
+      const { keyword, isStar, isDeleted, page = 1, pageSize = 10 } = query
+      // console.log(keyword, 'keyword')
+      // console.log(isStar, 'isStar')
+      // console.log(isDeleted, 'isDeleted')
+      // console.log(page, 'page')
+      // console.log(pageSize, 'pageSize')
       return {
         errno: 0,
         data: {
-          list: getQuestionList({ len: 20, isStar, isDeleted }), // 当前页数据
+          list: getQuestionList({ len: pageSize, isStar, isDeleted }), // 当前页数据
           total: 100 // 总数, 用于分页
         }
       }

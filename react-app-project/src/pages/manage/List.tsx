@@ -1,50 +1,16 @@
 import type { FC } from 'react'
-// import { useEffect, useState } from 'react'
-import { useTitle } from 'ahooks'
-// import { useSearchParams } from 'react-router-dom'
-import { Typography, Spin } from 'antd'
-// import { getQuestionListService } from '../../services/question'
-import useLoadQuestionListData from '../../hooks/useLoadQuestionListData'
+import { useState, useEffect, useRef } from 'react'
+import { useSearchParams } from 'react-router'
+import { useTitle, useDebounceFn, useRequest } from 'ahooks'
+import { Typography, Spin, Empty } from 'antd'
+import { getQuestionListService } from '../../services/question'
+// import useLoadQuestionListData from '../../hooks/useLoadQuestionListData'
+import { DEFAULT_PAGE_SIZE, LIST_SEARCH_PARAM_KEY } from '../../constant/index'
 import QuestionCard from '../../components/QuestionCard/QuestionCard'
 import ListSearch from '../../components/ListSearch/ListSearch'
 import styles from './common.module.scss'
 
 const { Title } = Typography
-
-// const rawQuestionList = [
-// 	{
-// 		_id: 'q1',
-// 		title: '问卷1',
-// 		isPublished: false,
-// 		isStar: true,
-// 		answerCount: 5,
-// 		createdAt: '5月10日 13:23'
-// 	},
-// 	{
-// 		_id: 'q2',
-// 		title: '问卷2',
-// 		isPublished: true,
-// 		isStar: true,
-// 		answerCount: 5,
-// 		createdAt: '5月11日 13:23'
-// 	},
-// 	{
-// 		_id: 'q3',
-// 		title: '问卷3',
-// 		isPublished: false,
-// 		isStar: true,
-// 		answerCount: 5,
-// 		createdAt: '5月12日 13:23'
-// 	},
-// 	{
-// 		_id: 'q4',
-// 		title: '问卷4',
-// 		isPublished: true,
-// 		isStar: false,
-// 		answerCount: 5,
-// 		createdAt: '5月13日 13:23'
-// 	}
-// ]
 
 type questionListType = {
 	_id: string
@@ -55,38 +21,87 @@ type questionListType = {
 	createdAt: string
 }
 
-const contentStyle: React.CSSProperties = {
-	padding: 50,
-	background: 'rgba(0, 0, 0, 0.05)',
-	borderRadius: 4
-}
-
-const content = <div style={contentStyle} />
-
 const List: FC = () => {
 	useTitle('我的问卷 - 我的问卷')
-	// const [searchParams] = useSearchParams()
-	// console.log('keyword', searchParams.get('keyword'))
-
-	// const [questionList, setQuestionList] = useState(rawQuestionList)
-
-	// 使用 useEffect 获取数据
-	// const [list, setList] = useState([])
-	// const [total, setTotal] = useState(0)
-	// useEffect(() => {
-	// 	async function load() {
-	// 		const data = await getQuestionListService()
-	// 		const { list = [], total = 0 } = data
-	// 		setList(list)
-	// 		setTotal(total)
-	// 	}
-	// 	load()
-	// }, [])
 
 	// 使用自定义 hooks 获取数据
-	const { loading, data = {} } = useLoadQuestionListData()
-	const { list = [], total = 0 } = data
+	// const { loading, data = {} } = useLoadQuestionListData()
+	// const { list = [], total = 0 } = data
 
+	const [page, setPage] = useState(1) // list 内部的数据，不在url参数中体现
+	const [total, setTotal] = useState(0)
+	const [list, setList] = useState([]) // 全部的列表数据，上划加载更多用，累计
+	const haveMoreData = total > list.length // 有没有更多的，未加载完成的数据
+	const [searchParams] = useSearchParams() // url 参数,虽然没有 page pageSize, 但有 keyword
+
+	// 真正加载
+	const { run: load, loading } = useRequest(
+		async () => {
+			const data = await getQuestionListService({
+				keyword: searchParams.get(LIST_SEARCH_PARAM_KEY) || '',
+				page,
+				pageSize: DEFAULT_PAGE_SIZE
+			})
+			return data
+		},
+		{
+			onSuccess: (data) => {
+				const { list: newList = [], total = 0 } = data
+				setList(list.concat(newList))
+				setTotal(total) // 总数 累计
+				setPage(page + 1) // page 累计
+			},
+			manual: true // 手动触发
+		}
+	)
+
+	// useRef 获取 dom
+	const containerRef = useRef<HTMLDivElement>(null)
+	// 触发加载 - 防抖 tryLoadMore
+	const { run: tryLoadMore } = useDebounceFn(
+		() => {
+			const elem = containerRef.current
+			if (elem == null) return
+			const domRect = elem.getBoundingClientRect()
+			if (domRect == null) return
+			const { bottom } = domRect
+			if (bottom <= document.body.clientHeight) {
+				// console.log('执行加载')
+				load() // 执行加载
+			}
+		},
+		{ wait: 1000 }
+	)
+
+	// 1.首次加载时，触发 tryLoadMore，依赖 searchParams 变化，触发 tryLoadMore
+	useEffect(() => {
+		tryLoadMore()
+	}, [searchParams])
+
+	// 2.当页面滚动时，尝试触发加载
+	useEffect(() => {
+		if (haveMoreData) {
+			window.addEventListener('scroll', tryLoadMore) // 考虑防抖
+		}
+		// 当 searchParams 变化之前，移除销毁 scroll 事件，避免内存泄露，重要！！！
+		return () => {
+			window.removeEventListener('scroll', tryLoadMore)
+		}
+	}, [searchParams, haveMoreData])
+
+	//  LoadMore Elem
+	const loadMoreContentElem = () => {
+		if (loading) return <Spin />
+		if (total === 0)
+			return (
+				<Empty
+					image={Empty.PRESENTED_IMAGE_DEFAULT}
+					styles={{ image: { height: 100 } }}
+					description={<Typography.Text>暂无问卷</Typography.Text>}
+				></Empty>
+			)
+		if (haveMoreData) return <Typography.Text>没有更多了...</Typography.Text>
+	}
 	return (
 		<>
 			<div className={styles.header}>
@@ -98,14 +113,8 @@ const List: FC = () => {
 				</div>
 			</div>
 			<div className={styles.content}>
-				{loading && (
-					<Spin tip="加载中..." size="large">
-						{content}
-					</Spin>
-				)}
 				{/* 问卷列表 */}
-				{!loading &&
-					list.length > 0 &&
+				{list.length > 0 &&
 					list.map((question: questionListType) => {
 						const { _id } = question
 						return (
@@ -122,9 +131,9 @@ const List: FC = () => {
 						)
 					})}
 			</div>
-			{!loading && list.length > 0 && (
-				<div className={styles.footer}>{total}loadMore 上划加载更多...</div>
-			)}
+			<div className={styles.footer}>
+				<div ref={containerRef}>{loadMoreContentElem()}</div>
+			</div>
 		</>
 	)
 }

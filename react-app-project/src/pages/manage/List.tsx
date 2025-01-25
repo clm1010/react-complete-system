@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { useSearchParams } from 'react-router'
 import { useTitle, useDebounceFn, useRequest } from 'ahooks'
 import { Typography, Spin, Empty } from 'antd'
@@ -28,17 +28,28 @@ const List: FC = () => {
 	// const { loading, data = {} } = useLoadQuestionListData()
 	// const { list = [], total = 0 } = data
 
+	const [started, setStarted] = useState(false) // 标记是否开始加载
+
 	const [page, setPage] = useState(1) // list 内部的数据，不在url参数中体现
 	const [total, setTotal] = useState(0)
 	const [list, setList] = useState([]) // 全部的列表数据，上划加载更多用，累计
 	const haveMoreData = total > list.length // 有没有更多的，未加载完成的数据
 	const [searchParams] = useSearchParams() // url 参数,虽然没有 page pageSize, 但有 keyword
+	const keyword = searchParams.get(LIST_SEARCH_PARAM_KEY) || ''
+
+	// keyword 变化时, 重置数据
+	useEffect(() => {
+		setStarted(false)
+		setPage(1)
+		setTotal(0)
+		setList([])
+	}, [keyword])
 
 	// 真正加载
 	const { run: load, loading } = useRequest(
 		async () => {
 			const data = await getQuestionListService({
-				keyword: searchParams.get(LIST_SEARCH_PARAM_KEY) || '',
+				keyword,
 				page,
 				pageSize: DEFAULT_PAGE_SIZE
 			})
@@ -68,6 +79,7 @@ const List: FC = () => {
 			if (bottom <= document.body.clientHeight) {
 				// console.log('执行加载')
 				load() // 执行加载
+				setStarted(true) // 标记开始加载
 			}
 		},
 		{ wait: 1000 }
@@ -89,9 +101,10 @@ const List: FC = () => {
 		}
 	}, [searchParams, haveMoreData])
 
-	//  LoadMore Elem
-	const loadMoreContentElem = () => {
-		if (loading) return <Spin />
+	//  LoadMore Elem, 根据状态显示不同的内容
+	// 使用 useMemo 缓存，避免重复渲染
+	const loadMoreContentElem = useMemo(() => {
+		if (!started || loading) return <Spin />
 		if (total === 0)
 			return (
 				<Empty
@@ -100,8 +113,9 @@ const List: FC = () => {
 					description={<Typography.Text>暂无问卷</Typography.Text>}
 				></Empty>
 			)
-		if (haveMoreData) return <Typography.Text>没有更多了...</Typography.Text>
-	}
+		if (!haveMoreData) return <Typography.Text>没有更多了...</Typography.Text>
+		return <Typography.Text>加载中...</Typography.Text>
+	}, [started, loading, haveMoreData])
 	return (
 		<>
 			<div className={styles.header}>
@@ -132,7 +146,7 @@ const List: FC = () => {
 					})}
 			</div>
 			<div className={styles.footer}>
-				<div ref={containerRef}>{loadMoreContentElem()}</div>
+				<div ref={containerRef}>{loadMoreContentElem}</div>
 			</div>
 		</>
 	)

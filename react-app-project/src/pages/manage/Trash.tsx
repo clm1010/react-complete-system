@@ -1,11 +1,12 @@
 import type { FC } from 'react'
-import { useTitle } from 'ahooks'
+import { useTitle, useRequest } from 'ahooks'
 import { useState } from 'react'
 import useLoadQuestionListData from '../../hooks/useLoadQuestionListData'
-import { Typography, Empty, Table, Tag, Button, Space, Modal, Spin } from 'antd'
+import { Typography, Empty, Table, Tag, Button, Space, Modal, Spin, message } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import ListSearch from '../../components/ListSearch/ListSearch'
 import ListPage from '../../components/ListPage/ListPage'
+import { updateQuestionService } from '../../services/question'
 import styles from './common.module.scss'
 
 const { Title } = Typography
@@ -31,12 +32,29 @@ const Trash: FC = () => {
 	useTitle('我的问卷 - 回收站')
 
 	// 使用自定义 hooks 获取数据
-	const { loading, data = {} } = useLoadQuestionListData({ isDeleted: true })
+	const { loading, data = {}, refresh } = useLoadQuestionListData({ isDeleted: true })
 	const { list = [], total = 0 } = data
 
 	// 记录选中的表格Id
 	// useState<string[]>([]) 定义数组类型 string
 	const [selectedIds, setSelectedIds] = useState<string[]>([])
+
+	// 还原问卷
+	const { loading: recoverLoading, run: recover } = useRequest(
+		async () => {
+			for await (const id of selectedIds) {
+				await updateQuestionService(id, { isDeleted: false })
+			}
+		},
+		{
+			onSuccess: () => {
+				message.success('还原成功')
+				refresh() // 手动刷新列表
+			},
+			debounceWait: 500, // 防抖时间
+			manual: true
+		}
+	)
 
 	// 表格列
 	const tableColumns = [
@@ -96,7 +114,12 @@ const Trash: FC = () => {
 		<>
 			<div style={{ marginBottom: '16px' }}>
 				<Space>
-					<Button type="primary" disabled={selectedIds.length === 0}>
+					<Button
+						type="primary"
+						disabled={selectedIds.length === 0}
+						onClick={recover}
+						loading={recoverLoading}
+					>
 						还原
 					</Button>
 					<Button

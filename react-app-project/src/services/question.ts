@@ -72,3 +72,14 @@ export async function duplicateQuestionService(id: string): Promise<ResDataType>
 	const data = (await axios.post(url)) as ResDataType
 	return data
 }
+
+/**
+ * @description 批量彻底删除问卷
+ * @param ids 问卷id数组
+ * @returns 返回删除问卷的data
+ */
+export async function deleteQuestionService(ids: string[]): Promise<ResDataType> {
+	const url = `/api/question`
+	const data = (await axios.delete(url, { data: { ids } })) as ResDataType
+	return data
+}

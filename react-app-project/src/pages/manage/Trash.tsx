@@ -6,7 +6,7 @@ import { Typography, Empty, Table, Tag, Button, Space, Modal, Spin, message } fr
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import ListSearch from '../../components/ListSearch/ListSearch'
 import ListPage from '../../components/ListPage/ListPage'
-import { updateQuestionService } from '../../services/question'
+import { updateQuestionService, deleteQuestionService } from '../../services/question'
 import styles from './common.module.scss'
 
 const { Title } = Typography
@@ -50,8 +50,25 @@ const Trash: FC = () => {
 			onSuccess: () => {
 				message.success('还原成功')
 				refresh() // 手动刷新列表
+				setSelectedIds([]) // 还原成功后清空选中的Id
 			},
 			debounceWait: 500, // 防抖时间
+			manual: true
+		}
+	)
+
+	// 彻底删除问卷
+	const { loading: deleteLoading, run: deleteQuestion } = useRequest(
+		async () => {
+			deleteQuestionService(selectedIds)
+		},
+		{
+			onSuccess: () => {
+				message.success('删除成功')
+				refresh() // 手动刷新列表
+				setSelectedIds([]) // 还原成功后清空选中的Id
+			},
+			debounceWait: 500,
 			manual: true
 		}
 	)
@@ -101,7 +118,8 @@ const Trash: FC = () => {
 			okType: 'danger',
 			cancelText: '取消',
 			onOk() {
-				window.alert(JSON.stringify(selectedIds))
+				// window.alert(JSON.stringify(selectedIds))
+				deleteQuestion()
 			},
 			onCancel() {
 				console.log('Cancel')
@@ -127,6 +145,7 @@ const Trash: FC = () => {
 						danger
 						disabled={selectedIds.length === 0}
 						onClick={handleCompleteDel}
+						loading={deleteLoading}
 					>
 						彻底删除
 					</Button>

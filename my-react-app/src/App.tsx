@@ -1,7 +1,7 @@
 // import { useEffect } from 'react'
 
 // import ReactHookFormDemo from './ReactHookFormDemo'
-import ReactFormikDemo from './ReactFormikDemo'
+// import ReactFormikDemo from './ReactFormikDemo'
 
 // import FormElemsDemo from './FormElemsDemo'
 // import List1 from './List1'
@@ -77,7 +77,7 @@ export default function App() {
 
       {/* 第三方hooks - 表单校验 */}
       {/* <ReactHookFormDemo /> */}
-      <ReactFormikDemo />
+      {/* <ReactFormikDemo /> */}
     </>
   )
 }

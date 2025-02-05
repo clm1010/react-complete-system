@@ -25,7 +25,10 @@
 // import ClosureTrap from './ClosureTrap'
 
 // CSS 样式
-// import StyledComponentsDemo from './StyledComponentsDemo'
+// import StyledComponentsDemo from './StyledComponentsDemo'\
+
+// Context 跨组件通信
+import ContextDemo from './ContextDemo'
 
 export default function App() {
   // useTitle('my-react-app') // 内置 hook - 自定义 hook
@@ -78,6 +81,9 @@ export default function App() {
       {/* 第三方hooks - 表单校验 */}
       {/* <ReactHookFormDemo /> */}
       {/* <ReactFormikDemo /> */}
+
+      {/* Context 跨组件通信 */}
+      <ContextDemo />
     </>
   )
 }

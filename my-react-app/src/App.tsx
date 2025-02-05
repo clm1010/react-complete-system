@@ -28,7 +28,11 @@
 // import StyledComponentsDemo from './StyledComponentsDemo'\
 
 // Context 跨组件通信
-import ContextDemo from './ContextDemo'
+// import ContextDemo from './ContextDemo'
+
+// Reducer 示例
+// import CountReducer from './CountReducer'
+import TodoReducerDemo from './TodoReducer'
 
 export default function App() {
   // useTitle('my-react-app') // 内置 hook - 自定义 hook
@@ -83,7 +87,11 @@ export default function App() {
       {/* <ReactFormikDemo /> */}
 
       {/* Context 跨组件通信 */}
-      <ContextDemo />
+      {/* <ContextDemo /> */}
+
+      {/* Reducer */}
+      {/* <CountReducer /> */}
+      <TodoReducerDemo />
     </>
   )
 }

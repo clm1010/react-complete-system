@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { increment, decrease } from './store/count'
-import type { StateType } from './store/index'
+import { increment, decrease } from '../store/count'
+import type { StateType } from '../store/index'
 
 export const Count: FC = () => {
 	const count = useSelector<StateType>((state) => state.count)

@@ -14,6 +14,9 @@ module.exports = [
           username: Random.title(),
           nickname: Random.cname()
         }
+        // // 测试用户信息获取失败，页面跳转到登录页
+        // errno: 100,
+        // msg: '获取用户信息失败'
       }
     }
   },

@@ -80,3 +80,23 @@ export const LOGIN_PATHNAME = '/login'
 export const REGISTER_PATHNAME = '/register'
 export const HOME_PATHNAME = '/'
 export const MANAGE_INDEX_PATHNAME = '/manage/list'
+
+/**
+ * @description 判断是否是登录或注册页面
+ * @param pathname 路由地址
+ * @returns 判断是否是登录或注册页面
+
+ */
+export const isLoginOrRegister = (pathname: string) => {
+	if ([LOGIN_PATHNAME, REGISTER_PATHNAME].includes(pathname)) return true
+	return false
+}
+
+/**
+ * @description 判断是否不需要用户信息
+ * @param pathname 路由地址
+ */
+export const isNoNeedUserInfo = (pathname: string) => {
+	if ([HOME_PATHNAME, LOGIN_PATHNAME, REGISTER_PATHNAME].includes(pathname)) return true
+	return false
+}

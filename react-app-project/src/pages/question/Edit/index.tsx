@@ -8,20 +8,17 @@ import styles from './index.module.scss'
 const Edit: FC = () => {
 	useTitle('编辑问卷')
 	// const { id = '' } = useParams()
-	const { loading, data } = useLoadQuestionData()
+	const { loading } = useLoadQuestionData()
 
 	return (
 		<div className={styles.container}>
-			{/* <p>Edit page</p>
-			{loading ? <p>loading...</p> : <p>{JSON.stringify(data)}</p>}
-       */}
 			<div style={{ backgroundColor: '#fff', height: '40px' }}>Header</div>
 			<div className={styles['content-wrapper']}>
 				<div className={styles.content}>
 					<div className={styles.left}>Left</div>
 					<div className={styles.main}>
 						<div className={styles['canvas-wrapper']}>
-							<EditCanvas />
+							<EditCanvas loading={loading} />
 						</div>
 					</div>
 					<div className={styles.right}>Right</div>

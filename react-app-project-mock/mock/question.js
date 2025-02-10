@@ -12,7 +12,31 @@ module.exports = [
         errno: 0,
         data: {
           id: Random.id(),
-          title: Random.ctitle()
+          title: Random.ctitle(),
+          // 组件列表
+          componentList: [
+            // Title 组件
+            {
+              id: Random.id(),
+              type: 'questionTitle', // 组件类型，不能重复，前后端统一好
+              title: '标题',
+              props: { text: '个人信息调研', level: 1, isCenter: false }
+            },
+            // Input 组件
+            {
+              id: Random.id(),
+              type: 'questionInput',
+              title: '输入框1',
+              props: { text: '你的姓名', placeholder: '请输入姓名...' }
+            },
+            // Input 组件
+            {
+              id: Random.id(),
+              type: 'questionInput',
+              title: '输入框2',
+              props: { text: '你的电话', placeholder: '请输入电话...' }
+            }
+          ]
         }
       }
     }

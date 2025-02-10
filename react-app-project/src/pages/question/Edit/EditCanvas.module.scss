@@ -18,3 +18,11 @@
 .component {
 	pointer-events: none; // 禁用鼠标行为，组件不让被点击到
 }
+
+// 垂直居中
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}

@@ -8,6 +8,14 @@ import useNavPage from '../hooks/useNavPage'
 import styles from './MainLayout.module.scss'
 
 const { Header, Content, Footer } = Layout
+
+const contentStyle: React.CSSProperties = {
+	padding: 60,
+	background: 'rgba(0, 0, 0, 0.02)',
+	borderRadius: 4
+}
+const content = <div style={contentStyle} />
+
 /**
  * @description MainLayout 主布局
  */
@@ -37,7 +45,9 @@ const MainLayout: FC = () => {
 							justifyContent: 'center',
 							alignItems: 'center'
 						}}
-					/>
+					>
+						{content}
+					</Spin>
 				) : (
 					<Outlet />
 				)}

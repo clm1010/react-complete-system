@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { useRequest } from 'ahooks'
@@ -32,7 +32,7 @@ const useLoadQuestionData = () => {
 		const { title = '', componentList = [] } = data
 
 		// 把 componentList 存储到 redux store 中
-		dispatch(resetComponents({ componentList }))
+		dispatch(resetComponents({ componentList, selectedId: '' }))
 	}, [data])
 
 	// 判断id变化，执行 ajax 加载数据

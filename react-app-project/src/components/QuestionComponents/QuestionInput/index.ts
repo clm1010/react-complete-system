@@ -4,7 +4,7 @@ import { QuestionInputDefaultProps } from './interface'
 export * from './interface'
 
 /**
- * @description QuestionInput 输入框组件
+ * @description QuestionInput 输入框组件配置
  */
 export default {
 	title: '输入框',

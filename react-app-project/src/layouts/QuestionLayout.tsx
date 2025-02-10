@@ -4,6 +4,13 @@ import { Spin } from 'antd'
 import useLoadUserData from '../hooks/useLoadUserData'
 import useNavPage from '../hooks/useNavPage'
 
+const contentStyle: React.CSSProperties = {
+	padding: 60,
+	background: 'rgba(0, 0, 0, 0.02)',
+	borderRadius: 4
+}
+const content = <div style={contentStyle} />
+
 const QuestionLayout: FC = () => {
 	// 加载用户信息
 	const { waitingUserData } = useLoadUserData()
@@ -23,7 +30,9 @@ const QuestionLayout: FC = () => {
 						justifyContent: 'center',
 						alignItems: 'center'
 					}}
-				/>
+				>
+					{content}
+				</Spin>
 			) : (
 				<Outlet />
 			)}

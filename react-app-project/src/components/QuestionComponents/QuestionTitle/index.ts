@@ -4,7 +4,7 @@ import { QuestionTitleDefaultProps } from './interface'
 export * from './interface'
 
 /**
- * @description QuestionTitle 标题组件
+ * @description QuestionTitle 标题组件配置
  */
 export default {
 	title: '标题',

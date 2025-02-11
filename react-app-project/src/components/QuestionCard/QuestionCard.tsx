@@ -17,7 +17,7 @@ import styles from './QuestionCard.module.scss'
 const { confirm } = Modal
 
 type PropsType = {
-	_id: string
+	_id: string // 服务端 mongodb，自动 _id 不重复，在服务端创建
 	title: string
 	isPublished: boolean
 	isStar: boolean

@@ -15,7 +15,7 @@ const genComponent = (c: ComponentConfType) => {
 	const dispatch = useDispatch()
 
 	const handlerClick = () => {
-		dispatch(addComponent({ fe_id: nanoid(5), type, title, props: defaultProps }))
+		dispatch(addComponent({ fe_id: nanoid(), type, title, props: defaultProps }))
 	}
 
 	return (

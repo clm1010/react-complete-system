@@ -27,14 +27,14 @@ module.exports = [
               fe_id: Random.id(),
               type: 'questionInput',
               title: '输入框1',
-              props: { text: '你的姓名', placeholder: '请输入姓名...' }
+              props: { title: '你的姓名', placeholder: '请输入姓名...' }
             },
             // Input 组件
             {
               fe_id: Random.id(),
               type: 'questionInput',
               title: '输入框2',
-              props: { text: '你的电话', placeholder: '请输入电话...' }
+              props: { title: '你的电话', placeholder: '请输入电话...' }
             }
           ]
         }

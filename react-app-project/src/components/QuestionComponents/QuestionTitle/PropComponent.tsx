@@ -8,7 +8,7 @@ import { QuestionTitlePropsType } from './interface'
  * @param props QuestionInputPropsType
  */
 const PropComponent: FC<QuestionTitlePropsType> = (props: QuestionTitlePropsType) => {
-	const { text, level, isCenter } = props
+	const { text, level, isCenter, onChange } = props
 	const [form] = Form.useForm()
 
 	// 监听 text、level、isCenter 变化，更新表单
@@ -16,8 +16,21 @@ const PropComponent: FC<QuestionTitlePropsType> = (props: QuestionTitlePropsType
 		form.setFieldsValue({ text, level, isCenter })
 	}, [text, level, isCenter])
 
+	// 表单值变化
+	const handlerValuesChange = () => {
+		// 如果有 onChange 回调，则执行
+		if (onChange) {
+			onChange(form.getFieldsValue())
+		}
+	}
+
 	return (
-		<Form form={form} layout="vertical" initialValues={{ text, level, isCenter }}>
+		<Form
+			form={form}
+			layout="vertical"
+			initialValues={{ text, level, isCenter }}
+			onValuesChange={handlerValuesChange}
+		>
 			<Form.Item
 				label="标题内容"
 				name="text"

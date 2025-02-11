@@ -8,7 +8,7 @@ import { QuestionInputPropsType } from './interface'
  * @param props QuestionInputPropsType
  */
 const PropComponent: FC<QuestionInputPropsType> = (props: QuestionInputPropsType) => {
-	const { title, placeholder } = props
+	const { title, placeholder, onChange } = props
 	const [form] = Form.useForm()
 
 	// 监听 title 和 placeholder 变化，更新表单
@@ -16,9 +16,22 @@ const PropComponent: FC<QuestionInputPropsType> = (props: QuestionInputPropsType
 		form.setFieldsValue({ title, placeholder })
 	}, [title, placeholder])
 
+	// 表单值变化
+	const handlerValuesChange = () => {
+		// 如果有 onChange 回调，则执行
+		if (onChange) {
+			onChange(form.getFieldsValue())
+		}
+	}
+
 	return (
-		<Form form={form} layout="vertical" initialValues={{ title, placeholder }}>
-			<Form.Item label="标题" name={title} rules={[{ required: true, message: '请输入标题' }]}>
+		<Form
+			form={form}
+			layout="vertical"
+			initialValues={{ title, placeholder }}
+			onValuesChange={handlerValuesChange}
+		>
+			<Form.Item label="标题" name="title" rules={[{ required: true, message: '请输入标题' }]}>
 				<Input />
 			</Form.Item>
 			<Form.Item label="Placeholder" name="placeholder">

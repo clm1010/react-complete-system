@@ -58,10 +58,29 @@ export const componentsSlice = createSlice({
 				// 添加后重新设置 selectedId，自动选中
 				draft.selectedId = newComponent.fe_id
 			}
+		),
+
+		// 修改组件属性
+		changeComponentProps: produce(
+			(
+				draft: ComponentsStateType,
+				action: PayloadAction<{ fe_id: string; newProps: ComponentPropsType }>
+			) => {
+				const { fe_id, newProps } = action.payload
+				// 找到要修改的组件
+				const curComp = draft.componentList.find((c) => c.fe_id === fe_id)
+				if (curComp) {
+					curComp.props = {
+						...curComp.props,
+						...newProps
+					}
+				}
+			}
 		)
 	}
 })
 
-export const { resetComponents, changeSelectedId, addComponent } = componentsSlice.actions
+export const { resetComponents, changeSelectedId, addComponent, changeComponentProps } =
+	componentsSlice.actions
 
 export default componentsSlice.reducer

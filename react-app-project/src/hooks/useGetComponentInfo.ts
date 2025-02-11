@@ -7,12 +7,17 @@ import { ComponentsStateType } from '../store/componentsReducer/index'
  * @returns componentList 组件列表
  */
 const useGetComponentInfo = () => {
+	// redux store
 	const components = useSelector<StateType>((state) => state.components) as ComponentsStateType
 	const { componentList = [], selectedId } = components
 
+	// 根据 selectedId 获取当前选中的组件
+	const selectedComponent = componentList.find((c) => c.fe_id === selectedId)
+
 	return {
 		componentList,
-		selectedId
+		selectedId,
+		selectedComponent
 	}
 }
 

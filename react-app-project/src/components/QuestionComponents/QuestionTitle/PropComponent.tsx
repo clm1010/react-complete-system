@@ -8,7 +8,7 @@ import { QuestionTitlePropsType } from './interface'
  * @param props QuestionInputPropsType
  */
 const PropComponent: FC<QuestionTitlePropsType> = (props: QuestionTitlePropsType) => {
-	const { text, level, isCenter, onChange } = props
+	const { text, level, isCenter, onChange, disabled } = props
 	const [form] = Form.useForm()
 
 	// 监听 text、level、isCenter 变化，更新表单
@@ -30,6 +30,7 @@ const PropComponent: FC<QuestionTitlePropsType> = (props: QuestionTitlePropsType
 			layout="vertical"
 			initialValues={{ text, level, isCenter }}
 			onValuesChange={handlerValuesChange}
+			disabled={disabled}
 		>
 			<Form.Item
 				label="标题内容"

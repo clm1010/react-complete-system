@@ -24,7 +24,7 @@ const ComponentProp: FC = () => {
 	// 如果没有选中组件，就返回未选中组件
 	if (selectedComponent == null) return <NoProp />
 
-	const { type, props } = selectedComponent
+	const { type, props, isLocked, isHidden } = selectedComponent
 	// 根据 type 获取配置
 	const componentConf = getComponentConfByType(type)
 	// 如果没有配置，就返回未选中组件
@@ -39,7 +39,7 @@ const ComponentProp: FC = () => {
 
 	const { PropComponent } = componentConf
 
-	return <PropComponent {...props} onChange={changeProps} />
+	return <PropComponent {...props} onChange={changeProps} disabled={isLocked || isHidden} />
 }
 
 export default ComponentProp

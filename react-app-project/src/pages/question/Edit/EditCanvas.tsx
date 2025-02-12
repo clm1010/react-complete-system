@@ -53,23 +53,27 @@ const EditCanvas: FC<PropsType> = (props: PropsType) => {
 	return (
 		<div className={styles.canvas}>
 			{/* 根据 componentList 渲染对应的组件 */}
-			{componentList.map((item) => {
-				const { fe_id } = item
+			{componentList
+				.filter((c) => !c.isHidden)
+				.map((item) => {
+					const { fe_id, isLocked } = item
 
-				// 拼接 class name
-				const wrapperDefaultClassName = styles['component-wrapper']
-				const selectedClassName = styles.selected
-				const wrapperClassName = classNames({
-					[wrapperDefaultClassName]: true,
-					[selectedClassName]: fe_id === selectedId
-				})
+					// 拼接 class name
+					const wrapperDefaultClassName = styles['component-wrapper']
+					const selectedClassName = styles.selected
+					const lockedClassName = styles.locked
+					const wrapperClassName = classNames({
+						[wrapperDefaultClassName]: true,
+						[selectedClassName]: fe_id === selectedId,
+						[lockedClassName]: isLocked
+					})
 
-				return (
-					<div key={fe_id} className={wrapperClassName} onClick={(e) => handlerClick(e, fe_id)}>
-						<div className={styles.component}>{genComponent(item)}</div>
-					</div>
-				)
-			})}
+					return (
+						<div key={fe_id} className={wrapperClassName} onClick={(e) => handlerClick(e, fe_id)}>
+							<div className={styles.component}>{genComponent(item)}</div>
+						</div>
+					)
+				})}
 		</div>
 	)
 }

@@ -20,6 +20,8 @@ module.exports = [
               fe_id: Random.id(),
               type: 'questionTitle', // 组件类型，不能重复，前后端统一好
               title: '标题',
+              isHidden: false, // 控制组件是否隐藏
+              isLocked: false, // 控制组件是否锁定
               props: { text: '个人信息调研', level: 1, isCenter: false }
             },
             // Input 组件
@@ -27,6 +29,8 @@ module.exports = [
               fe_id: Random.id(),
               type: 'questionInput',
               title: '输入框1',
+              isHidden: false, // 控制组件是否隐藏
+              isLocked: false,
               props: { title: '你的姓名', placeholder: '请输入姓名...' }
             },
             // Input 组件
@@ -34,6 +38,8 @@ module.exports = [
               fe_id: Random.id(),
               type: 'questionInput',
               title: '输入框2',
+              isHidden: false, // 控制组件是否隐藏
+              isLocked: false,
               props: { title: '你的电话', placeholder: '请输入电话...' }
             }
           ]

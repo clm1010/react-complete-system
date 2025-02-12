@@ -38,7 +38,7 @@ const useLoadQuestionData = () => {
 		}
 
 		// 把 componentList 存储到 redux store 中
-		dispatch(resetComponents({ componentList, selectedId }))
+		dispatch(resetComponents({ componentList, selectedId, copiedComponent: null }))
 	}, [data])
 
 	// 判断id变化，执行 ajax 加载数据

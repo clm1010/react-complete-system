@@ -3,7 +3,9 @@ import { useDispatch } from 'react-redux'
 import {
 	removeSelectedComponent,
 	copySelectedComponent,
-	pasteCopiedComponent
+	pasteCopiedComponent,
+	selectPrevComponent,
+	selectNextComponent
 } from '../store/componentsReducer/index'
 
 /**
@@ -39,6 +41,22 @@ function useBindCanvasKeyPress() {
 		if (!isActiveElementValid()) return
 		dispatch(pasteCopiedComponent())
 	})
+
+	// 选中上一个
+	useKeyPress('uparrow', () => {
+		if (!isActiveElementValid()) return
+		dispatch(selectPrevComponent())
+	})
+
+	// 选中下一个
+	useKeyPress('downarrow', () => {
+		if (!isActiveElementValid()) return
+		dispatch(selectNextComponent())
+	})
+
+	//TODO 撤销
+
+	//TODO 重做
 }
 
 export default useBindCanvasKeyPress

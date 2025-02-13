@@ -5,6 +5,7 @@ import { Spin } from 'antd'
 import useGetComponentInfo from '../../../hooks/useGetComponentInfo'
 import { getComponentConfByType } from '../../../components/QuestionComponents/index'
 import { ComponentInfoType, changeSelectedId } from '../../../store/componentsReducer/index'
+import useBindCanvasKeyPress from '../../../hooks/useBindCanvasKeyPress'
 import styles from './EditCanvas.module.scss'
 
 type PropsType = {
@@ -41,6 +42,9 @@ const EditCanvas: FC<PropsType> = (props: PropsType) => {
 		event.stopPropagation() // 阻止事件冒泡
 		dispatch(changeSelectedId(id))
 	}
+
+	// 使用 自定义 hooks 绑定键盘快捷键事件
+	useBindCanvasKeyPress()
 
 	if (loading) {
 		return (

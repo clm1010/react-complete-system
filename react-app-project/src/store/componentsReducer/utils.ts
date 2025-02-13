@@ -5,7 +5,7 @@ import { ComponentInfoType, ComponentsStateType } from './index'
  * @param fe_id 当前选中的组件id
  * @param componentList 组件列表
  */
-export const getNextSelectedId = (selectedId: string, componentList: ComponentInfoType[]) => {
+export function getNextSelectedId(selectedId: string, componentList: ComponentInfoType[]) {
 	// 过滤掉隐藏的
 	const visibleComponentList = componentList.filter((c) => !c.isHidden)
 
@@ -37,7 +37,7 @@ export const getNextSelectedId = (selectedId: string, componentList: ComponentIn
  * @param draft 组件列表
  * @param newComponent 新组件
  */
-export const insertNewComponent = (draft: ComponentsStateType, newComponent: ComponentInfoType) => {
+export function insertNewComponent(draft: ComponentsStateType, newComponent: ComponentInfoType) {
 	const { selectedId, componentList } = draft
 	const index = componentList.findIndex((c) => c.fe_id === selectedId)
 

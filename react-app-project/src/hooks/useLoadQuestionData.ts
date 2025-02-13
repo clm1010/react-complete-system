@@ -9,7 +9,8 @@ import { resetComponents } from '../store/componentsReducer/index'
  * @description 加载问卷数据 hook
  * @returns {loading: boolean, data: any, error: any}
  */
-const useLoadQuestionData = () => {
+
+function useLoadQuestionData() {
 	const { id = '' } = useParams() // 获取页面路径id
 	const dispatch = useDispatch()
 

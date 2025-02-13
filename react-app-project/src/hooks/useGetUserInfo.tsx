@@ -6,7 +6,7 @@ import { UserStateType } from '../store/useReducer'
  * @description 获取用户信息
  * @returns {username: string, nickname: string}
  */
-const useGetUserInfo = () => {
+function useGetUserInfo() {
 	const { username, nickname } = useSelector<StateType>((state) => state.user) as UserStateType
 	return { username, nickname }
 }

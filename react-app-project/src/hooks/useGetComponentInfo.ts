@@ -6,7 +6,7 @@ import { ComponentsStateType } from '../store/componentsReducer/index'
  * @description 获取组件信息
  * @returns componentList 组件列表
  */
-const useGetComponentInfo = () => {
+function useGetComponentInfo() {
 	// redux store
 	const components = useSelector<StateType>((state) => state.components) as ComponentsStateType
 	const { componentList = [], selectedId, copiedComponent } = components

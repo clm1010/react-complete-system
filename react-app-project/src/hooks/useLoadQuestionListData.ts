@@ -18,7 +18,7 @@ type OptionType = {
  * @deprecated 搜索加载问卷列表数据 hook
  * @returns {loading: boolean, data: any, error: any}
  */
-const useLoadQuestionListData = (opt: Partial<OptionType> = {}) => {
+function useLoadQuestionListData(opt: Partial<OptionType> = {}) {
 	const { isStar, isDeleted } = opt
 	const [searchParams] = useSearchParams()
 

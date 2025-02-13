@@ -12,7 +12,7 @@ import useGetUserInfo from './useGetUserInfo'
  * @description 根据当前用户的登录状态决定跳转的页面
  * @param waitingUserData 是否获取用户信息
  */
-const useNavPage = (waitingUserData: boolean) => {
+function useNavPage(waitingUserData: boolean) {
 	const { username } = useGetUserInfo()
 	const { pathname } = useLocation()
 	const nav = useNavigate()

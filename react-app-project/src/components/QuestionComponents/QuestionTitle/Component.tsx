@@ -8,7 +8,7 @@ const { Title } = Typography
  * @description QuestionTitle 组件
  * @param props QuestionTitlePropsType
  */
-const QuestionTitle: FC<QuestionTitlePropsType> = (props: QuestionTitlePropsType) => {
+const Component: FC<QuestionTitlePropsType> = (props: QuestionTitlePropsType) => {
 	const {
 		text = '',
 		level = 1,
@@ -44,4 +44,4 @@ const QuestionTitle: FC<QuestionTitlePropsType> = (props: QuestionTitlePropsType
 	)
 }
 
-export default QuestionTitle
+export default Component

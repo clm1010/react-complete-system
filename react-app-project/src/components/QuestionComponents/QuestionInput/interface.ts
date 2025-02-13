@@ -4,6 +4,7 @@
 export type QuestionInputPropsType = {
 	title?: string
 	placeholder?: string
+	// 用于 PropComponent 属性表单
 	onChange?: (newProps: QuestionInputPropsType) => void
 	disabled?: boolean
 }

@@ -5,6 +5,10 @@ import { QuestionParagraphPropsType } from './interface'
 
 const { TextArea } = Input
 
+/**
+ * @description QuestionParagraph 属性组件设置
+ * @param props QuestionParagraphPropsType
+ */
 const PropComponent: FC<QuestionParagraphPropsType> = (props: QuestionParagraphPropsType) => {
 	const { text, isCenter, onChange, disabled } = props
 	const [form] = Form.useForm()
@@ -34,7 +38,7 @@ const PropComponent: FC<QuestionParagraphPropsType> = (props: QuestionParagraphP
 				name="text"
 				rules={[{ required: true, message: '请输入段落内容' }]}
 			>
-				<TextArea rows={3} placeholder="请输入段落内容" />
+				<TextArea rows={8} placeholder="请输入段落内容" />
 			</Form.Item>
 			<Form.Item name="isCenter" valuePropName="checked">
 				<Checkbox>居中显示</Checkbox>

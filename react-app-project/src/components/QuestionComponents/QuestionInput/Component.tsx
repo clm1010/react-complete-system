@@ -8,7 +8,7 @@ const { Paragraph } = Typography
  * @description QuestionInput 组件
  * @param props QuestionInputPropsType
  */
-const Component: FC<QuestionInputPropsType> = (props: QuestionInputPropsType) => {
+const QuestionInput: FC<QuestionInputPropsType> = (props: QuestionInputPropsType) => {
 	const { title, placeholder } = {
 		...QuestionInputDefaultProps,
 		...props
@@ -22,4 +22,4 @@ const Component: FC<QuestionInputPropsType> = (props: QuestionInputPropsType) =>
 		</div>
 	)
 }
-export default Component
+export default QuestionInput

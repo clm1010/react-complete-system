@@ -15,6 +15,15 @@ module.exports = [
           title: Random.ctitle(),
           // 组件列表
           componentList: [
+            // Info 组件
+            {
+              fe_id: Random.id(),
+              type: 'questionInfo', // 组件类型，不能重复，前后端统一好
+              title: '问题信息',
+              isHidden: false, // 控制组件是否隐藏
+              isLocked: false, // 控制组件是否锁定
+              props: { title: '个人信息调研', desc: '问卷描述...' }
+            },
             // Title 组件
             {
               fe_id: Random.id(),
@@ -22,7 +31,7 @@ module.exports = [
               title: '标题',
               isHidden: false, // 控制组件是否隐藏
               isLocked: false, // 控制组件是否锁定
-              props: { text: '个人信息调研', level: 1, isCenter: false }
+              props: { text: '个人标题信息', level: 1, isCenter: false }
             },
             // Input 组件
             {
@@ -41,6 +50,26 @@ module.exports = [
               isHidden: false, // 控制组件是否隐藏
               isLocked: false,
               props: { title: '你的电话', placeholder: '请输入电话...' }
+            },
+            // Textarea 组件
+            {
+              fe_id: Random.id(),
+              type: 'questionTextarea',
+              title: '多行文本框',
+              isHidden: false, // 控制组件是否隐藏
+              isLocked: false, // 控制组件是否锁定
+              props: { title: '你的爱好', placeholder: '请输入你的爱好...' }
+            },
+            // Paragraph 组件
+            {
+              fe_id: Random.id(),
+              type: 'questionParagraph',
+              title: '段落',
+              isHidden: false, // 控制组件是否隐藏
+              isLocked: false, // 控制组件是否锁定
+              props: {
+                text: '这是一段文字', isCenter: false
+              }
             }
           ]
         }

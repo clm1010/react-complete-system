@@ -8,7 +8,7 @@ const { Paragraph } = Typography
  * @description QuestionParagraph 段落组件
  * @param props QuestionParagraphPropsType
  */
-const Component: FC<QuestionParagraphPropsType> = (props: QuestionParagraphPropsType) => {
+const QuestionParagraph: FC<QuestionParagraphPropsType> = (props: QuestionParagraphPropsType) => {
 	const { text = '', isCenter = false } = { ...QuestionParagraphDefaultProps, ...props }
 
 	// 处理换行
@@ -28,4 +28,4 @@ const Component: FC<QuestionParagraphPropsType> = (props: QuestionParagraphProps
 	)
 }
 
-export default Component
+export default QuestionParagraph

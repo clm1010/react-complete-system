@@ -8,7 +8,7 @@ const { Title, Paragraph } = Typography
  * @description QuestionInfo 组件
  * @param props QuestionInfoPropsType
  */
-const Component: FC<QuestionInfoPropsType> = (props: QuestionInfoPropsType) => {
+const QuestionInfo: FC<QuestionInfoPropsType> = (props: QuestionInfoPropsType) => {
 	const { title = '', desc = '' } = { ...QuestionInfoDefaultProps, ...props }
 
 	// 处理换行
@@ -31,4 +31,4 @@ const Component: FC<QuestionInfoPropsType> = (props: QuestionInfoPropsType) => {
 	)
 }
 
-export default Component
+export default QuestionInfo

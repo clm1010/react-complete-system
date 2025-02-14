@@ -70,6 +70,24 @@ module.exports = [
               props: {
                 text: '这是一段文字', isCenter: false
               }
+            },
+            // Radio 组件
+            {
+              fe_id: Random.id(),
+              type: 'questionRadio',
+              title: '单选',
+              isHidden: false, // 控制组件是否隐藏
+              isLocked: false, // 控制组件是否锁定
+              props: {
+                title: '单选标题',
+                isVertical: false,
+                options: [
+                  { value: 'item1', text: '选项1' },
+                  { value: 'item2', text: '选项2' },
+                  { value: 'item3', text: '选项3' }
+                ],
+                value: 'item1'
+              }
             }
           ]
         }

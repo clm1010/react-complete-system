@@ -13,6 +13,9 @@ module.exports = [
         data: {
           id: Random.id(),
           title: Random.ctitle(),
+          desc: '问卷描述',
+          js: '',
+          css: '',
           // 组件列表
           componentList: [
             // Info 组件

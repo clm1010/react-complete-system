@@ -1,8 +1,8 @@
 // 存储组件列表数据
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { produce } from 'immer'
 import cloneDeep from 'lodash.clonedeep'
 import { nanoid } from 'nanoid'
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ComponentPropsType } from '../../components/QuestionComponents/index'
 import { getNextSelectedId, insertNewComponent } from './utils'
 
@@ -55,6 +55,12 @@ export const componentsSlice = createSlice({
 				insertNewComponent(draft, newComponent)
 			}
 		),
+
+		// 添加新组建 @reduxjs/toolkit 2.0 版本, 内置了 immer
+		// addComponent: (state: ComponentsStateType, action: PayloadAction<ComponentInfoType>) => {
+		// 	const newComponent = action.payload
+		// 	insertNewComponent(state, newComponent)
+		// },
 
 		// 修改组件属性
 		changeComponentProps: produce(

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useRequest } from 'ahooks'
 import { getQuestionService } from '../services/question'
 import { resetComponents } from '../store/componentsReducer/index'
+import { resetPageInfo } from '../store/pageInfoReducer'
 
 /**
  * @description 加载问卷数据 hook
@@ -30,7 +31,7 @@ function useLoadQuestionData() {
 	useEffect(() => {
 		if (!data) return
 
-		const { title = '', componentList = [] } = data
+		const { title = '', desc = '', js = '', css = '', componentList = [] } = data
 
 		// 获取默认的 selectedId
 		let selectedId = ''
@@ -40,6 +41,9 @@ function useLoadQuestionData() {
 
 		// 把 componentList 存储到 redux store 中
 		dispatch(resetComponents({ componentList, selectedId, copiedComponent: null }))
+
+		// 把 pageInfo 存储到 redux store 中
+		dispatch(resetPageInfo({ title, desc, js, css }))
 	}, [data])
 
 	// 判断id变化，执行 ajax 加载数据

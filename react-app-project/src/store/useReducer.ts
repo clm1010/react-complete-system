@@ -1,15 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+// 用户信息 Reducer
+
+/**
+ * @description 用户信息类型
+ */
 export type UserStateType = {
 	username: string
 	nickname: string
 }
 
+/**
+ * @description 初始化用户信息
+ */
 const INIT_STATE: UserStateType = {
 	username: '',
 	nickname: ''
 }
 
+/**
+ * @description 用户信息 slice
+ */
 export const userSlice = createSlice({
 	name: 'user',
 	initialState: INIT_STATE,

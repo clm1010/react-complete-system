@@ -2,9 +2,15 @@ import type { FC, ChangeEvent } from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import classNames from 'classnames'
-import { message, Input } from 'antd'
+import { message, Input, Button, Space } from 'antd'
+import { EyeInvisibleOutlined, LockOutlined } from '@ant-design/icons'
 import useGetComponentInfo from '../../../hooks/useGetComponentInfo'
-import { changeSelectedId, changeComponentTitle } from '../../../store/componentsReducer'
+import {
+	changeSelectedId,
+	changeComponentTitle,
+	changeComponentHidden,
+	toggleComponentLock
+} from '../../../store/componentsReducer'
 import styles from './Layers.module.scss'
 
 const Layers: FC = () => {
@@ -41,6 +47,16 @@ const Layers: FC = () => {
 		dispatch(changeComponentTitle({ fe_id: selectedId, title: newTitle }))
 	}
 
+	// 切换 隐藏/显示
+	const handlerChangeHidden = (fe_id: string, isHidden: boolean) => {
+		// 如果要隐藏的组件正在被选中，则取消选中
+		dispatch(changeComponentHidden({ fe_id, isHidden }))
+	}
+
+	// 切换 锁定/解锁
+	const handlerChangeLocked = (fe_id: string) => {
+		dispatch(toggleComponentLock({ fe_id }))
+	}
 	return (
 		<>
 			{componentList.map((c) => {
@@ -67,7 +83,26 @@ const Layers: FC = () => {
 							)}
 							{fe_id !== changingTitleId && title}
 						</div>
-						<div className={styles.handler}>按钮</div>
+						<div className={styles.handler}>
+							<Space>
+								<Button
+									size="small"
+									shape="circle"
+									className={!isHidden ? styles.btn : ''}
+									icon={<EyeInvisibleOutlined />}
+									type={isHidden ? 'primary' : 'text'}
+									onClick={() => handlerChangeHidden(fe_id, !isHidden)}
+								/>
+								<Button
+									size="small"
+									shape="circle"
+									className={!isLocked ? styles.btn : ''}
+									icon={<LockOutlined />}
+									type={isLocked ? 'primary' : 'text'}
+									onClick={() => handlerChangeLocked(fe_id)}
+								/>
+							</Space>
+						</div>
 					</div>
 				)
 			})}

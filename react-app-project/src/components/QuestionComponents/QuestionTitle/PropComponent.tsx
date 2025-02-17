@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { useEffect } from 'react'
 import { Form, Input, Select, Checkbox } from 'antd'
-import { QuestionTitlePropsType } from './interface'
+import type { QuestionTitlePropsType } from './interface'
 
 /**
  * @description QuestionTitle 属性组件设置

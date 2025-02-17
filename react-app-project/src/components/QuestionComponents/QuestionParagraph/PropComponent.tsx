@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { useEffect } from 'react'
 import { Form, Input, Checkbox } from 'antd'
-import { QuestionParagraphPropsType } from './interface'
+import type { QuestionParagraphPropsType } from './interface'
 
 const { TextArea } = Input
 

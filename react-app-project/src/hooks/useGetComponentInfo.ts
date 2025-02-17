@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
-import { StateType } from '../store/index'
-import { ComponentsStateType } from '../store/componentsReducer/index'
+import type { StateType } from '../store/index'
+import type { ComponentsStateType } from '../store/componentsReducer/index'
 
 /**
  * @description 获取组件信息

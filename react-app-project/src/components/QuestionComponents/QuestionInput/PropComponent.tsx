@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { useEffect } from 'react'
 import { Form, Input } from 'antd'
-import { QuestionInputPropsType } from './interface'
+import type { QuestionInputPropsType } from './interface'
 
 /**
  * @description QuestionInput 属性组件设置

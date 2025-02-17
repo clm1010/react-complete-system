@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
-import { StateType } from '../store/index'
-import { UserStateType } from '../store/useReducer'
+import type { StateType } from '../store/index'
+import type { UserStateType } from '../store/useReducer'
 
 /**
  * @description 获取用户信息

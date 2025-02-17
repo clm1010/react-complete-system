@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { useEffect } from 'react'
 import { Form, Input } from 'antd'
-import { QuestionTextareaPropsType } from './interface'
+import type { QuestionTextareaPropsType } from './interface'
 
 /**
  * @description QuestionTextarea 属性组件设置

@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { nanoid } from 'nanoid'
 import { Form, Input, Checkbox, Space, Button } from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { QuestionCheckboxPropsType, OptionType } from './interface'
+import type { QuestionCheckboxPropsType, OptionType } from './interface'
 
 const PropComponent: FC<QuestionCheckboxPropsType> = (props: QuestionCheckboxPropsType) => {
 	const { title, isVertical, list = [], onChange, disabled } = props

@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { nanoid } from 'nanoid'
 import { Form, Input, Checkbox, Select, Button, Space } from 'antd'
 import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons'
-import { QuestionRadioPropsType, OptionType } from './interface'
+import type { QuestionRadioPropsType, OptionType } from './interface'
 
 const PropComponent: FC<QuestionRadioPropsType> = (props: QuestionRadioPropsType) => {
 	const { title, isVertical, options = [], value, onChange, disabled } = props

@@ -7,7 +7,7 @@ import { ComponentPropsType } from '../../components/QuestionComponents/index'
 import { getNextSelectedId, insertNewComponent } from './utils'
 
 /**
- * @description 组件信息
+ * @description 组件信息类型
  */
 export type ComponentInfoType = {
 	fe_id: string
@@ -18,12 +18,18 @@ export type ComponentInfoType = {
 	props: ComponentPropsType
 }
 
+/**
+ * @description 组件列表类型
+ */
 export type ComponentsStateType = {
 	selectedId: string
 	componentList: Array<ComponentInfoType>
 	copiedComponent: ComponentInfoType | null
 }
 
+/**
+ * @description 初始化组件列表
+ */
 const INIT_STATE: ComponentsStateType = {
 	selectedId: '',
 	componentList: [],
@@ -38,7 +44,12 @@ export const componentsSlice = createSlice({
 	name: 'components',
 	initialState: INIT_STATE,
 	reducers: {
-		// 重置所有组件
+		/**
+		 * @description 重置所有组件
+		 * @param state 组件列表类型
+		 * @param action PayloadAction
+		 * @returns action.payload 组件列表
+		 */
 		resetComponents: (state: ComponentsStateType, action: PayloadAction<ComponentsStateType>) => {
 			return action.payload
 		},

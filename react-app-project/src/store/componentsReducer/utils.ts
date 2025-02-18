@@ -32,22 +32,43 @@ export function getNextSelectedId(selectedId: string, componentList: ComponentIn
 	return newSelectedId
 }
 
+// /**
+//  * @description 插入新组件
+//  * @param draft 组件列表
+//  * @param newComponent 新组件
+//  */
+// export function insertNewComponent(draft: ComponentsStateType, newComponent: ComponentInfoType) {
+// 	const { selectedId, componentList } = draft
+// 	const index = componentList.findIndex((c) => c.fe_id === selectedId)
+
+// 	// 未选中任何组件，就添加到最后一个
+// 	if (index < 0) {
+// 		draft.componentList.push(newComponent)
+// 	} else {
+// 		// 选中了组件，就插入到 index 后面
+// 		draft.componentList.splice(index + 1, 0, newComponent)
+// 	}
+// 	// 添加后重新设置 selectedId，自动选中
+// 	draft.selectedId = newComponent.fe_id
+// }
+
 /**
  * @description 插入新组件
- * @param draft 组件列表
+ * @param state 组件列表
  * @param newComponent 新组件
+ * @description reduxjs/toolkit 2.0 版本, 内置了 immer, 会自动处理不可变数据, 可以不使用 produce
  */
-export function insertNewComponent(draft: ComponentsStateType, newComponent: ComponentInfoType) {
-	const { selectedId, componentList } = draft
+export function insertNewComponent(state: ComponentsStateType, newComponent: ComponentInfoType) {
+	const { selectedId, componentList } = state
 	const index = componentList.findIndex((c) => c.fe_id === selectedId)
 
 	// 未选中任何组件，就添加到最后一个
 	if (index < 0) {
-		draft.componentList.push(newComponent)
+		state.componentList.push(newComponent)
 	} else {
 		// 选中了组件，就插入到 index 后面
-		draft.componentList.splice(index + 1, 0, newComponent)
+		state.componentList.splice(index + 1, 0, newComponent)
 	}
 	// 添加后重新设置 selectedId，自动选中
-	draft.selectedId = newComponent.fe_id
+	state.selectedId = newComponent.fe_id
 }

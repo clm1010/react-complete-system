@@ -9,8 +9,11 @@ import {
 	changeSelectedId,
 	changeComponentTitle,
 	changeComponentHidden,
-	toggleComponentLock
-} from '../../../store/componentsReducer'
+	toggleComponentLock,
+	moveComponent
+} from '../../../store/componentsReducer/index'
+import SortableContainer from '../../../components/DragSortable/SortableContainer'
+import SortableItem from '../../../components/DragSortable/SortableItem'
 import styles from './Layers.module.scss'
 
 const Layers: FC = () => {
@@ -40,7 +43,7 @@ const Layers: FC = () => {
 	}
 
 	// 修改标题
-	const handlerChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+	const handleChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
 		const newTitle = event.target.value.trim()
 		if (!newTitle) return
 		if (!selectedId) return
@@ -48,17 +51,28 @@ const Layers: FC = () => {
 	}
 
 	// 切换 隐藏/显示
-	const handlerChangeHidden = (fe_id: string, isHidden: boolean) => {
+	const handleChangeHidden = (fe_id: string, isHidden: boolean) => {
 		// 如果要隐藏的组件正在被选中，则取消选中
 		dispatch(changeComponentHidden({ fe_id, isHidden }))
 	}
 
 	// 切换 锁定/解锁
-	const handlerChangeLocked = (fe_id: string) => {
+	const handleChangeLocked = (fe_id: string) => {
 		dispatch(toggleComponentLock({ fe_id }))
 	}
+
+	// SortableContainer 组件的 items 属性，需要每个 item 都有 id
+	const componentListWithId = componentList.map((c) => {
+		return { ...c, id: c.fe_id }
+	})
+
+	// 拖拽排序结束
+	const handleDragEnd = (oldIndex: number, newIndex: number) => {
+		dispatch(moveComponent({ oldIndex, newIndex }))
+	}
+
 	return (
-		<>
+		<SortableContainer items={componentListWithId} onDragEnd={handleDragEnd}>
 			{componentList.map((c) => {
 				const { fe_id, title, isHidden, isLocked } = c
 
@@ -71,42 +85,45 @@ const Layers: FC = () => {
 				})
 
 				return (
-					<div key={fe_id} className={styles.wrapper}>
-						<div className={titleClassName} onClick={() => handleClick(fe_id)}>
-							{fe_id === changingTitleId && (
-								<Input
-									value={title}
-									onChange={handlerChangeTitle}
-									onPressEnter={() => setChangingTitleId('')}
-									onBlur={() => setChangingTitleId('')}
-								/>
-							)}
-							{fe_id !== changingTitleId && title}
+					// SortableItem 每个排序 item
+					<SortableItem key={fe_id} id={fe_id}>
+						<div className={styles.wrapper}>
+							<div className={titleClassName} onClick={() => handleClick(fe_id)}>
+								{fe_id === changingTitleId && (
+									<Input
+										value={title}
+										onChange={handleChangeTitle}
+										onPressEnter={() => setChangingTitleId('')}
+										onBlur={() => setChangingTitleId('')}
+									/>
+								)}
+								{fe_id !== changingTitleId && title}
+							</div>
+							<div className={styles.handler}>
+								<Space>
+									<Button
+										size="small"
+										shape="circle"
+										className={!isHidden ? styles.btn : ''}
+										icon={<EyeInvisibleOutlined />}
+										type={isHidden ? 'primary' : 'text'}
+										onClick={() => handleChangeHidden(fe_id, !isHidden)}
+									/>
+									<Button
+										size="small"
+										shape="circle"
+										className={!isLocked ? styles.btn : ''}
+										icon={<LockOutlined />}
+										type={isLocked ? 'primary' : 'text'}
+										onClick={() => handleChangeLocked(fe_id)}
+									/>
+								</Space>
+							</div>
 						</div>
-						<div className={styles.handler}>
-							<Space>
-								<Button
-									size="small"
-									shape="circle"
-									className={!isHidden ? styles.btn : ''}
-									icon={<EyeInvisibleOutlined />}
-									type={isHidden ? 'primary' : 'text'}
-									onClick={() => handlerChangeHidden(fe_id, !isHidden)}
-								/>
-								<Button
-									size="small"
-									shape="circle"
-									className={!isLocked ? styles.btn : ''}
-									icon={<LockOutlined />}
-									type={isLocked ? 'primary' : 'text'}
-									onClick={() => handlerChangeLocked(fe_id)}
-								/>
-							</Space>
-						</div>
-					</div>
+					</SortableItem>
 				)
 			})}
-		</>
+		</SortableContainer>
 	)
 }
 

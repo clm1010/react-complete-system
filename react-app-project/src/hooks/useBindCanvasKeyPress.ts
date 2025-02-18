@@ -13,7 +13,14 @@ import {
  */
 function isActiveElementValid() {
 	const activeElement = document.activeElement // 获取当前激活的元素
-	if (activeElement === document.body) return true // 如果当前激活的元素是body，光标没有 focus 到 input
+
+	// 没有增加 dnd-kit 拖拽之前的判断
+	// if (activeElement === document.body) return true // 如果当前激活的元素是body，光标没有 focus 到 input
+
+	// 增加 dnd-kit 拖拽之后的判断
+	if (activeElement === document.body) return true
+	if (activeElement?.matches('div[role="button"]')) return true
+
 	return false
 }
 

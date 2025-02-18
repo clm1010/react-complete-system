@@ -59,7 +59,7 @@ const EditToolbar: FC = () => {
 		dispatch(pasteCopiedComponent())
 	}
 
-	//TODO 上移/下移，撤销/重做
+	//TODO 撤销/重做
 	// 上移组件
 	const handleMoveUp = () => {
 		if (isFirst) return // 已经是第一个了，不需要上移

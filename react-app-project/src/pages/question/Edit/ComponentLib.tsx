@@ -11,11 +11,18 @@ const { Title } = Typography
 
 // 生成组件
 function genComponent(c: ComponentConfType) {
-	const dispatch = useDispatch()
 	const { title, type, Component, defaultProps } = c
+	const dispatch = useDispatch()
 
 	const handlerClick = useCallback(() => {
-		dispatch(addComponent({ fe_id: nanoid(), type, title, props: defaultProps }))
+		dispatch(
+			addComponent({
+				fe_id: nanoid(),
+				title,
+				type,
+				props: defaultProps
+			})
+		)
 	}, [])
 
 	return (

@@ -8,7 +8,12 @@ import type { ComponentsStateType } from '../store/componentsReducer/index'
  */
 function useGetComponentInfo() {
 	// redux store
-	const components = useSelector<StateType>((state) => state.components) as ComponentsStateType
+	// const components = useSelector<StateType>((state) => state.components) as ComponentsStateType
+
+	const components = useSelector<StateType>(
+		(state) => state.components.present
+	) as ComponentsStateType // 增加了 undo
+
 	const { componentList = [], selectedId, copiedComponent } = components
 
 	// 根据 selectedId 获取当前选中的组件

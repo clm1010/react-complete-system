@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import type { FC } from 'react'
 import { useNavigate } from 'react-router'
 import { useTitle } from 'ahooks'
 import { MANAGE_INDEX_PATHNAME } from '../router'

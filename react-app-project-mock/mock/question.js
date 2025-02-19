@@ -16,6 +16,7 @@ module.exports = [
           desc: '问卷描述',
           js: '',
           css: '',
+          isPublished: true,
           // 组件列表
           componentList: [
             // Info 组件

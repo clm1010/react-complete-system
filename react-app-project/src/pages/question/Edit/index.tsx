@@ -4,6 +4,7 @@ import { changeSelectedId } from '../../../store/componentsReducer/index'
 // import { useParams } from 'react-router'
 import { useTitle } from 'ahooks'
 import useLoadQuestionData from '../../../hooks/useLoadQuestionData'
+import useGetPageInfo from '../../../hooks/useGetPageInfo'
 import EditHeader from './EditHeader'
 import EditCanvas from './EditCanvas'
 import LeftPanel from './LeftPanel'
@@ -11,11 +12,13 @@ import RightPanel from './RightPanel'
 import styles from './index.module.scss'
 
 const Edit: FC = () => {
-	useTitle('编辑问卷')
 	// const { id = '' } = useParams()
-	const { loading } = useLoadQuestionData()
-
 	const dispatch = useDispatch()
+	const { loading } = useLoadQuestionData()
+	const { title } = useGetPageInfo()
+
+	// 修改标题
+	useTitle(`编辑问卷 — ${title}`)
 
 	// 清除选中的组件
 	const clearSelectedId = () => {

@@ -1,10 +1,12 @@
 import type { FC } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Spin, Button, Result } from 'antd'
 import { useTitle } from 'ahooks'
 import useLoadQuestionData from '../../../hooks/useLoadQuestionData'
 import useGetPageInfo from '../../../hooks/useGetPageInfo'
 import StatHeader from './StatHeader'
+import ComponentList from './ComponentList'
 import styles from './index.module.scss'
 
 const contentStyle: React.CSSProperties = {
@@ -21,6 +23,10 @@ const Stat: FC = () => {
 	const nav = useNavigate()
 	const { loading } = useLoadQuestionData()
 	const { title, isPublished } = useGetPageInfo()
+
+	// 状态提升 selected 、type
+	const [selectedComponentId, setSelectedComponentId] = useState('')
+	const [selectedComponentType, setSelectedComponentType] = useState('')
 
 	// 修改标题
 	useTitle(`问卷统计 — ${title}`)
@@ -54,7 +60,13 @@ const Stat: FC = () => {
 
 		return (
 			<>
-				<div className={styles.left}>左侧</div>
+				<div className={styles.left}>
+					<ComponentList
+						selectedComponentId={selectedComponentId}
+						setSelectedComponentId={setSelectedComponentId}
+						setSelectedComponentType={setSelectedComponentType}
+					/>
+				</div>
 				<div className={styles.main}>中间</div>
 				<div className={styles.right}>右侧</div>
 			</>

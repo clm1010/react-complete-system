@@ -1,20 +1,15 @@
 import type { FC } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
-import { Spin, Button, Result } from 'antd'
+import { Button, Result } from 'antd'
 import { useTitle } from 'ahooks'
 import useLoadQuestionData from '../../../hooks/useLoadQuestionData'
 import useGetPageInfo from '../../../hooks/useGetPageInfo'
+import Loading from '../../../components/Loading'
 import StatHeader from './StatHeader'
 import ComponentList from './ComponentList'
+import PageStat from './PageStat'
 import styles from './index.module.scss'
-
-const contentStyle: React.CSSProperties = {
-	padding: 60,
-	background: 'rgba(0, 0, 0, 0.02)',
-	borderRadius: 4
-}
-const content = <div style={contentStyle} />
 
 /**
  * @description 问卷统计
@@ -33,8 +28,13 @@ const Stat: FC = () => {
 
 	// loading 效果
 	const LoadingElem = (
-		<div className={styles.center}>
-			<Spin tip="加载中...">{content}</Spin>
+		<div
+			className={styles.center}
+			style={{
+				height: `calc(100vh - 57px - 48px)`
+			}}
+		>
+			<Loading tip="加载中..." size="large" />
 		</div>
 	)
 
@@ -67,7 +67,13 @@ const Stat: FC = () => {
 						setSelectedComponentType={setSelectedComponentType}
 					/>
 				</div>
-				<div className={styles.main}>中间</div>
+				<div className={styles.main}>
+					<PageStat
+						selectedComponentId={selectedComponentId}
+						setSelectedComponentId={setSelectedComponentId}
+						setSelectedComponentType={setSelectedComponentType}
+					/>
+				</div>
 				<div className={styles.right}>右侧</div>
 			</>
 		)

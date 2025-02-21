@@ -1,20 +1,14 @@
 import type { FC } from 'react'
 import { Outlet } from 'react-router'
-import { Layout, Spin } from 'antd'
+import { Layout } from 'antd'
 import Logo from '../components/Logo/Logo'
+import Loading from '../components/Loading'
 import UserInfo from '../components/UserInfo/UserInfo'
 import useLoadUserData from '../hooks/useLoadUserData'
 import useNavPage from '../hooks/useNavPage'
 import styles from './MainLayout.module.scss'
 
 const { Header, Content, Footer } = Layout
-
-const contentStyle: React.CSSProperties = {
-	padding: 60,
-	background: 'rgba(0, 0, 0, 0.02)',
-	borderRadius: 4
-}
-const content = <div style={contentStyle} />
 
 /**
  * @description MainLayout 主布局
@@ -35,19 +29,16 @@ const MainLayout: FC = () => {
 			</Header>
 			<Content className={styles.main}>
 				{waitingUserData ? (
-					<Spin
-						tip="加载中..."
-						size="large"
+					<div
 						style={{
-							width: '100%',
-							height: `calc(100vh - 64px - 71px)`,
 							display: 'flex',
 							justifyContent: 'center',
-							alignItems: 'center'
+							alignItems: 'center',
+							height: `calc(100vh - 64px - 71px)`
 						}}
 					>
-						{content}
-					</Spin>
+						<Loading tip="加载中..." size="large" />
+					</div>
 				) : (
 					<Outlet />
 				)}

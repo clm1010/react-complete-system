@@ -1,9 +1,9 @@
 import type { FC, MouseEvent } from 'react'
 import { useDispatch } from 'react-redux'
 import classNames from 'classnames'
-import { Spin } from 'antd'
 import useGetComponentInfo from '../../../hooks/useGetComponentInfo'
 import { getComponentConfByType } from '../../../components/QuestionComponents/index'
+import Loading from '../../../components/Loading'
 import {
 	ComponentInfoType,
 	changeSelectedId,
@@ -17,13 +17,6 @@ import styles from './EditCanvas.module.scss'
 type PropsType = {
 	loading: boolean
 }
-
-const contentStyle: React.CSSProperties = {
-	padding: 60,
-	background: 'rgba(0, 0, 0, 0.02)',
-	borderRadius: 4
-}
-const content = <div style={contentStyle} />
 
 const genComponent = (componentInfo: ComponentInfoType) => {
 	const { type, props } = componentInfo // 每个组件的信息，是从 redux store 中获取（服务的获取）
@@ -55,7 +48,8 @@ const EditCanvas: FC<PropsType> = (props: PropsType) => {
 	if (loading) {
 		return (
 			<div className={styles.center}>
-				<Spin tip="加载中...">{content}</Spin>
+				{/* <Spin tip="加载中...123">{content}</Spin> */}
+				<Loading tip="加载中..." size="large" />
 			</div>
 		)
 	}

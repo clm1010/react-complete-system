@@ -1,12 +1,17 @@
 .container {
 	display: flex;
+	flex-direction: column;
 	height: 100%;
 	background-color: #f0f2f5;
 }
 
 .center {
-  display: flex;
-  flex: 1;
+	display: flex;
+	flex: 1;
 	justify-content: center;
 	align-items: center;
+}
+
+.pagination-wrapper {
+	margin-top: 18px;
 }

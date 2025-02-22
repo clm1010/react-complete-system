@@ -13,3 +13,5 @@ export const DEFAULT_PAGE_SIZE = 10
 
 export const STAT_PAGE = 1 // 统计列表，分页默认的 page
 export const STAT_PAGE_SIZE = 10 // 统计列表，分页默认的 pageSize
+
+export const STAT_COLORS = ['#FF2D2D', '#BE77FF', '#2894FF', '#00EC00', '#EAC100', '#FF9D6F']

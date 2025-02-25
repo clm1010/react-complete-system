@@ -14,3 +14,15 @@ export async function getQuestionStatListService(
 	const data = (await axios.get(url, { params: opt })) as ResDataType
 	return data
 }
+
+/**
+ * @description 获取单个组件的统计数据
+ * @param questionId 问卷id
+ * @param componentId 组件id
+ * @returns data 组件统计数据
+ */
+export async function getComponentStatService(questionId: string, componentId: string) {
+	const url = `/api/stat/${questionId}/${componentId}`
+	const data = (await axios.get(url)) as ResDataType
+	return data
+}

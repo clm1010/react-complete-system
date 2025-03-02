@@ -49,13 +49,14 @@ export async function postAnswerForm(
     console.log(answerInfo, 'answerInfo')
   } catch (error) {
     if (error instanceof Error) {
-      return { errors: { message: error.message } }
+      return { ...prevState, errors: { message: error.message } }
     }
-    return { errors: { message: 'Something went wrong' } }
+    return { ...prevState, errors: { message: 'Something went wrong' } }
   }
+  throw new Error('Something went wrong')
   // 重新验证清除缓存，渲染
-  revalidatePath('/success')
-  redirect('/success')
+  // revalidatePath('/success')
+  // redirect('/success')
 
   // return { ...prevState, errors: {} }
 }

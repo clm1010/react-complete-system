@@ -1,6 +1,6 @@
 'use client'
 
-type PropsType = {
+interface PropsType {
   fe_id: string
   props: {
     title: string

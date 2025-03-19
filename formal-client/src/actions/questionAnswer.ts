@@ -47,13 +47,19 @@ export async function postAnswerForm(
       ]
     }
     console.log(answerInfo, 'answerInfo')
+
+    const res = await fetch('http://localhost:3000/api/answer', {
+      method: 'POST', 
+      body: JSON.stringify(answerInfo)
+    })
+    console.log(res, 'res');
   } catch (error) {
     if (error instanceof Error) {
       return { ...prevState, errors: { message: error.message } }
     }
     return { ...prevState, errors: { message: 'Something went wrong' } }
   }
-  throw new Error('Something went wrong')
+  // throw new Error('Something went wrong')
   // 重新验证清除缓存，渲染
   // revalidatePath('/success')
   // redirect('/success')

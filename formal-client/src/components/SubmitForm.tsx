@@ -12,7 +12,7 @@ const initialState = {
   errors: { message: '' }
 }
 
-type PropsType = {
+interface PropsType {
   id: string
 }
 export default function SubmitForm(props: PropsType) {

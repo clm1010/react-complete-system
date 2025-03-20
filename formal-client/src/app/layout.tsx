@@ -5,7 +5,7 @@ import {
   // Geist_Mono,
   EB_Garamond
 } from 'next/font/google'
-import './globals.css'
+import './styles/globals.css'
 
 // const geistSans = Geist({
 //   variable: '--font-geist-sans',

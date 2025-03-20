@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         // search: ''
       }
     ]
+  },
+  // 配置环境变量白名单
+  env: {
+    NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
+    NEXT_PUBLIC_CORS_ORIGIN: process.env.NEXT_PUBLIC_CORS_ORIGIN
   }
 }
 

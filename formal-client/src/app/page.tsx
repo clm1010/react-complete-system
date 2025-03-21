@@ -1,14 +1,25 @@
-// import Image from 'next/image'
+/**
+ * 首页组件
+ * 展示问卷提交表单和入口导航
+ */
+
+import Link from 'next/link'
+import { SurveyForm } from '@/components/forms/SurveyForm'
 
 export default function Home() {
   return (
-    <div className='grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
-      <main className='flex flex-col gap-8 row-start-2 items-center sm:items-start'>
-        main
-      </main>
-      <footer className='row-start-3 flex gap-6 flex-wrap items-center justify-center'>
-        footer
-      </footer>
+    <div className='max-w-3xl mx-auto'>
+      <div className='bg-white p-6 rounded-lg shadow'>
+        <h2 className='text-xl font-semibold mb-6'>填写新问卷</h2>
+        <SurveyForm />
+
+        {/* 辅助导航 */}
+        <div className='mt-8 flex justify-end'>
+          <Link href='/survey' className='text-blue-600 hover:underline'>
+            查看历史问卷 →
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,20 +1,29 @@
+/**
+ * 问卷API路由（代理后端服务）
+ */
 import { NextRequest, NextResponse } from 'next/server'
 import { handleCors, corsHeaders } from '@/lib/cors'
-import { surveyMockService } from '@/mocks/survey.mock'
+
+export const dynamic = 'force-dynamic'
 
 export async function GET(req: NextRequest) {
   const corsResponse = handleCors(req)
   if (corsResponse) return corsResponse
 
   try {
-    const data = surveyMockService.getAll()
-    return NextResponse.json(
-      { success: true, data },
-      { headers: corsHeaders(req) }
-    )
+    const backendResponse = await fetch(`${process.env.BACKEND_API}/surveys`, {
+      headers: { Authorization: req.headers.get('Authorization') || '' }
+    })
+
+    const data = await backendResponse.json()
+
+    return new NextResponse(JSON.stringify(data), {
+      headers: corsHeaders(req)
+    })
   } catch (error) {
+    console.error('获取数据失败:', error)
     return NextResponse.json(
-      { success: false, error: error },
+      { success: false, error: '获取数据失败' },
       { status: 500, headers: corsHeaders(req) }
     )
   }
@@ -25,17 +34,28 @@ export async function POST(req: NextRequest) {
   if (corsResponse) return corsResponse
 
   try {
-    const data = await req.json()
-    const result = surveyMockService.create(data)
-    // const result = { id: '1' }
-    return NextResponse.json(
-      { success: true, data: result },
-      { status: 201, headers: corsHeaders(req) }
-    )
+    const payload = await req.json()
+
+    const backendResponse = await fetch(`${process.env.BACKEND_API}/surveys`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: req.headers.get('Authorization') || ''
+      },
+      body: JSON.stringify(payload)
+    })
+
+    const data = await backendResponse.json()
+
+    return new NextResponse(JSON.stringify(data), {
+      status: backendResponse.status,
+      headers: corsHeaders(req)
+    })
   } catch (error) {
+    console.error('创建问卷失败:', error)
     return NextResponse.json(
-      { success: false, error: error },
-      { status: 400, headers: corsHeaders(req) }
+      { success: false, error: '创建问卷失败' },
+      { status: 500, headers: corsHeaders(req) }
     )
   }
 }

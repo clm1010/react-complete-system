@@ -1,1 +1,1 @@
-export { postAnswerForm } from './questionAnswer'
+export { QuestionAnswerForm } from './question-answer'

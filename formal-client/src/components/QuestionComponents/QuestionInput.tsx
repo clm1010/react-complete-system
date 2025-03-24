@@ -13,9 +13,9 @@ export default function QuestionInput({ fe_id, props }: PropsType) {
   return (
     <>
       <p>{title}</p>
-      <div className='mb-4 pt-0 pb-0 pl-1.5 pr-1.5'>
+      <div className='w-full mb-4 pt-0 pb-0 pl-1.5 pr-1.5'>
         <input
-          className='w-full border-solid border-2 rounded-md border-gray-200 hover:border-blue-400 focus:border-blue-200 focus:outline-none'
+          className='w-full border-solid border-2 rounded-md border-gray-200 hover:border-purple-400 focus:border-purple-200 focus:outline-none dark:border-purple-800'
           type='text'
           name={fe_id}
           placeholder={placeholder}

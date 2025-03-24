@@ -1,6 +1,5 @@
 /**
- * CORS配置工具
- * 处理跨域请求验证和响应头设置
+ * CORS跨域处理工具
  */
 
 import { NextRequest, NextResponse } from 'next/server'
@@ -10,27 +9,16 @@ import { NextRequest, NextResponse } from 'next/server'
  * @param req 请求对象
  * @returns CORS相关headers
  */
-export const corsHeaders = (req: NextRequest) => {
-  const origin = req.headers.get('origin') || ''
-  const allowedOrigins = process.env.NEXT_PUBLIC_CORS_ORIGIN?.split(',') || []
+export const corsHeaders = (req: NextRequest) => ({
+  'Access-Control-Allow-Origin': req.headers.get('origin') || '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+})
 
-  return {
-    'Access-Control-Allow-Origin': allowedOrigins.includes(origin)
-      ? origin
-      : allowedOrigins[0], // 默认允许第一个源
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Credentials': 'true'
-  }
-}
-
-/**
- * 处理OPTIONS预检请求
- * @param req 请求对象
- * @returns 预检响应或undefined
- */
 export const handleCors = (req: NextRequest) => {
   if (req.method === 'OPTIONS') {
-    return new NextResponse(null, { headers: corsHeaders(req) })
+    return new NextResponse(null, {
+      headers: corsHeaders(req)
+    })
   }
 }

@@ -1,4 +1,4 @@
-import SubmitForm from '@/components/SubmitForm'
+import QuestionForm from '@/components/QuestionForm'
 
 interface PageProps {
   params: {
@@ -11,13 +11,11 @@ interface PageProps {
  * @param props  动态路由参数
  */
 export default async function Page(props: PageProps) {
-  //NextJS 15.0.0 版本之后获取动态路由参数，需要使用 await
   const { id } = await props.params
-
   return (
-    <div>
-      <p>Question {id}</p>
-      <SubmitForm id={id} />
+    <div className='flex flex-col items-center justify-center h-full'>
+      <p>Question</p>
+      <QuestionForm id={id} />
     </div>
   )
 }

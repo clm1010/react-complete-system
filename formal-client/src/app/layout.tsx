@@ -7,7 +7,8 @@ import {
 } from 'next/font/google'
 import '@/styles/globals.css'
 import { Providers } from './providers'
-import Link from 'next/link'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 // const geistSans = Geist({
 //   variable: '--font-geist-sans',
@@ -38,20 +39,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='zh-CN' className='dark'>
+    <html lang='zh-CN'>
       <body
         // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         className={`${ebGaramond.className} antialiased`}
       >
-        <main className='container mx-auto p-4'>
-          {/* 导航栏 */}
-          <nav className='mb-8 border-b pb-4'>
-            <h1 className='text-2xl font-bold text-blue-600'>
-              <Link href='/'>问卷系统</Link>
-            </h1>
-          </nav>
-          <Providers>{children}</Providers>
-        </main>
+        <Providers>
+          <Header />
+          <div style={{ height: 'calc(100vh - 128px)' }}>{children}</div>
+          <Footer />
+        </Providers>
       </body>
     </html>
   )

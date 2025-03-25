@@ -1,52 +1,56 @@
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
+
+interface ApiConfig<T> {
+  method?: HttpMethod
+  body?: T
+  headers?: HeadersInit
+}
 /**
- * 通用API请求工具库
- * 封装fetch请求，统一处理配置和错误
+ * 统一API请求客户端
+ * @param endpoint API端点
+ * @param config 请求配置
+ * @returns Promise化的响应数据
  */
-
-import type { SurveyData, ApiResponse } from '@/types/survey'
-
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
-
-/**
- * 通用请求器
- * @param endpoint API端点路径
- * @param options fetch配置选项
- * @returns 解析后的JSON数据
- */
-// eslint-disable-next-line
-export const fetcher = async <T = any>(
+// export async function apiClient<T = any, U = any>(
+export async function apiClient<T = unknown, U = unknown>(
   endpoint: string,
-  options?: RequestInit
-): Promise<T> => {
-  const response = await fetch(`${BASE_URL}${endpoint}`, {
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest' // 防止CSRF攻击
-    },
-    ...options
-  })
+  config: ApiConfig<U> = { method: 'GET' }
+): Promise<T> {
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
+  const url = `${baseUrl}${endpoint}`
 
-  // 处理非200响应
-  if (!response.ok) {
-    const error = await response.json()
-    throw new Error(error.message || 'API request failed')
+  try {
+    const response = await fetch(url, {
+      method: config.method,
+      headers: {
+        'Content-Type': 'application/json',
+        ...config.headers
+      },
+      body: config.body ? JSON.stringify(config.body) : undefined
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      throw new Error(data.error || '请求失败')
+    }
+
+    return data
+  } catch (error) {
+    throw new Error(error instanceof Error ? error.message : '未知错误')
   }
-
-  return response.json()
 }
 
-// API方法集合
-export const api = {
-  surveys: {
-    // 获取所有问卷
-    getAll: () => fetcher<ApiResponse>('/api/surveys'),
-    // 创建问卷
-    create: (data: Omit<SurveyData, 'id' | 'createdAt'>) =>
-      fetcher<ApiResponse>('/api/surveys', {
-        method: 'POST',
-        body: JSON.stringify(data)
-      }),
-    // 获取单个问卷
-    get: (id: string) => fetcher<ApiResponse>(`/api/surveys/${id}`)
-  }
+// 问卷API方法集合
+export const questionApi = {
+  /** 获取所有问卷 */
+  // getSurveys: () => apiClient<Survey[]>('/surveys'),
+  /** 获取单个问卷 */
+  // getSurvey: (id: number) => apiClient<Survey>(`/surveys/${id}`),
+  /** 创建问卷 */
+  // createSurvey: (data: Omit<Survey, 'id' | 'createdAt'>) =>
+  // apiClient<Survey>('/surveys', { method: 'POST', body: data }),
+  /** 更新问卷 */
+  // updateSurvey: (id: number, data: Partial<Survey>) =>
+  // apiClient<Survey>(`/surveys/${id}`, { method: 'PUT', body: data })
 }

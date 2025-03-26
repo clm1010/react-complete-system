@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { ApiService } from '@/services/question.srevices';
+import { ApiService } from '@/services/question.srevices'
 // const genAnswerInfo = (reqBody: any) => {
 //   let answerList = [] as any
 
@@ -54,6 +54,17 @@ export async function QuestionAnswerForm(
     //   body: JSON.stringify(answerInfo)
     // })
     // console.log(res, 'res')
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/question?id=${questionId}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(answerInfo)
+      }
+    )
+    const data = await response.json()
+    console.log(data, 'data')
   } catch (error) {
     if (error instanceof Error) {
       return { ...prevState, errors: { message: error.message } }
@@ -63,7 +74,7 @@ export async function QuestionAnswerForm(
   // throw new Error('Something went wrong')
   // 重新验证清除缓存，渲染
   revalidatePath('/')
-  redirect('/success')
+  // redirect('/success')
 
   // return {
   //   errors: {},

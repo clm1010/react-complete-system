@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { ApiService } from '@/services/api.service';
+import { ApiService } from '@/services/question.srevices';
 // const genAnswerInfo = (reqBody: any) => {
 //   let answerList = [] as any
 

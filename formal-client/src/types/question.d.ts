@@ -1,26 +1,17 @@
-/**
- * 问卷系统核心类型定义
- */
+// 问卷基础类型
+export interface Question {
+  id: number
+  title: string
+  content: string
+  gender: 'male' | 'female'
+  createdAt: string
+}
 
-declare namespace Question {
-  interface Data {
-    id: string;
-    title: string;
-    gender: 'male' | 'female' | 'other';
-    content: string;
-    createdAt: string;
-  }
+// 表单数据类型（排除自动生成字段）
+export type QuestionFormData = Omit<Question, 'id' | 'createdAt'>
 
-  interface ApiResponse<T = unknown> {
-    success: boolean;
-    data?: T;
-    error?: string;
-    code?: number;
-  }
-
-  interface CreatePayload {
-    title: string;
-    gender: Data['gender'];
-    content: string;
-  }
+// 表单状态类型
+export interface FormState {
+  error?: string | null
+  success?: boolean
 }

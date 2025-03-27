@@ -76,8 +76,8 @@ export async function QuestionAnswerForm(
   revalidatePath('/')
   // redirect('/success')
 
-  // return {
-  //   errors: {},
-  //   success: true
-  // }
+  return {
+    errors: {},
+    success: true
+  }
 }

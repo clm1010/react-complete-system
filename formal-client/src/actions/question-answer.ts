@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { ApiService } from '@/services/question.srevices'
+import { postAnswer } from '@/services/answer.services'
 // const genAnswerInfo = (reqBody: any) => {
 //   let answerList = [] as any
 
@@ -48,23 +48,23 @@ export async function QuestionAnswerForm(
       ]
     }
     console.log(answerInfo, 'answerInfo')
-
+    postAnswer(answerInfo)
     // const res = await fetch('http://localhost:3000/api/answer', {
     //   method: 'POST',
     //   body: JSON.stringify(answerInfo)
     // })
     // console.log(res, 'res')
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/question?id=${questionId}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(answerInfo)
-      }
-    )
-    const data = await response.json()
-    console.log(data, 'data')
+    // const response = await fetch(
+    //   `${process.env.NEXT_PUBLIC_API_BASE_URL}/question?id=${questionId}`,
+    //   {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify(answerInfo)
+    //   }
+    // )
+    // const data = await response.json()
+    // console.log(data, 'data')
   } catch (error) {
     if (error instanceof Error) {
       return { ...prevState, errors: { message: error.message } }

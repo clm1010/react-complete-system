@@ -41,3 +41,15 @@ export const updateQuestion = async (
     body: data
   })
 }
+
+
+/**
+ * 创建新问卷
+ * @param data 问卷表单数据
+ */
+export const postAnswer = async (data: any) => {
+  return apiClient('/api/answer', {
+    method: 'POST',
+    body: data
+  })
+}

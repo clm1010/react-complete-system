@@ -5,7 +5,8 @@ module.exports = [
     method: 'post',
     response() {
       return {
-        errno: 0
+        errno: 0,
+        message: 'success'
       }
     }
   }

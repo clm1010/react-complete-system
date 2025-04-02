@@ -4,7 +4,13 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes'
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <NextThemesProvider attribute="class" enableColorScheme={false}>
+    <NextThemesProvider
+      attribute='class'
+      defaultTheme='system'
+      enableSystem
+      enableColorScheme
+      // enableColorScheme={false}
+    >
       <HeroUIProvider>{children}</HeroUIProvider>
     </NextThemesProvider>
   )

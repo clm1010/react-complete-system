@@ -1,5 +1,3 @@
-// app/lib/fetchApi.ts
-
 /**
  * Fetches data from the backend API.
  * Prepends the base API URL from environment variables.
@@ -31,7 +29,7 @@ export async function fetchApi<T = any>(
   const url = `${apiUrl}${path}` // 拼接完整 URL
 
   // Log API calls (仅在服务器端可见, 因为 .env 变量默认不在客户端暴露)
-  console.log(`Service Layer Fetching API: ${options.method || 'GET'} ${url}`)
+  console.log(`服务层获取 API: ${options.method || 'GET'} ${url}`)
 
   try {
     const response = await fetch(url, {
@@ -49,12 +47,12 @@ export async function fetchApi<T = any>(
       try {
         errorData = await response.json() // 尝试解析错误响应体
       } catch (e) {
-        console.error(`Failed to parse error response from backend:`, e)
+        console.error(`解析后端错误响应失败:`, e)
         // 如果响应体不是 JSON 或解析失败
         errorData = {
           message:
             response.statusText ||
-            `Request failed with status ${response.status}`
+            `请求失败，状态码: ${response.status}`
         }
       }
       console.error(
@@ -63,7 +61,7 @@ export async function fetchApi<T = any>(
       )
       // 抛出包含后端信息的错误
       const error = new Error(
-        errorData.message || `Request failed with status ${response.status}`
+        errorData.message || `请求失败，状态码: ${response.status}`
       )
       // 可以附加状态码等信息到错误对象上，供上层处理
       ;(error as any).status = response.status
@@ -82,14 +80,14 @@ export async function fetchApi<T = any>(
   } catch (error) {
     // Log fetch 级别的错误 (如网络问题)
     console.error(
-      `Workspace API failed for ${url}:`,
+      `工作空间API失败 ${url}:`,
       error instanceof Error ? error.message : error
     )
     // 重新抛出错误，以便调用者可以处理
     if (error instanceof Error) {
       throw error // 抛出原始错误或包装后的错误
     } else {
-      throw new Error('An unknown fetch error occurred.')
+      throw new Error('发生了未知的读取错误.')
     }
   }
 }

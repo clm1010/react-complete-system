@@ -18,10 +18,13 @@ module.exports = [
           desc: '问卷描述',
           js: '',
           css: '',
+          isDeleted: false,
           isPublished: true,
           // 组件列表
           componentList: getComponentList()
         }
+        // errno: 1002,
+        // msg: '错误测试'
       }
     }
   },

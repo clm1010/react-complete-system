@@ -28,7 +28,7 @@ function getComponentList() {
       title: '标题',
       isHidden: false, // 控制组件是否隐藏
       isLocked: false, // 控制组件是否锁定
-      props: { text: '个人标题信息', level: 1, isCenter: false }
+      props: { text: '个人标题信息', level: 1, isCenter: true }
     },
     // Input 组件
     {

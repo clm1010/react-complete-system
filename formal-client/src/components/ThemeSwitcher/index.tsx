@@ -1,4 +1,5 @@
 'use client'
+import { Spinner } from '@heroui/react'
 import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 import { Moon, SunMoon } from 'lucide-react'
@@ -13,12 +14,9 @@ export default function ThemeSwitcher() {
 
   if (!mounted) {
     return (
-      <button
-        aria-label='Loading theme'
-        className='w-8 h-8 flex justify-center items-center rounded-lg bg-transparent'
-      >
-        <div className='h-4 w-4 rounded-full animate-pulse bg-red-400' />
-      </button>
+      <div className='flex'>
+        <Spinner color='secondary' size='sm' />
+      </div>
     )
   }
 
@@ -30,8 +28,6 @@ export default function ThemeSwitcher() {
     <div
       onClick={toggleTheme}
       className='w-8 h-8 flex justify-center items-center cursor-pointer rounded-lg hover:bg-default-200 dark:hover:bg-purple-800'
-      // onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-      // className='w-8 h-8 flex justify-center items-center cursor-pointer rounded-lg hover:bg-default-200 dark:hover:bg-purple-800 transition-colors'
       aria-label={`Toggle ${theme} mode`}
     >
       {theme === 'light' ? (

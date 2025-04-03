@@ -10,8 +10,8 @@ import {
   Button
 } from '@heroui/react'
 
-import QuestionInput from '@components/QuestionComponents/QuestionInput'
-import QuestionRadio from '@components/QuestionComponents/QuestionRadio'
+import { getComponent } from '@components/QuestionComponents/index'
+
 import { QuestionAnswerForm } from '@/actions/index'
 
 interface PropsType {
@@ -42,9 +42,28 @@ export default function QuestionForm(props: PropsType) {
     }
   }, [state])
 
+  // 遍历组件
+  const ComponentListElem = (
+    <>
+      {componentList.map((c: any) => {
+        const ComponentElem = getComponent(c)
+        // console.log(ComponentElem, 'ComponentElem')
+        if (ComponentElem == null) return
+        return (
+          <div
+            key={c.fe_id}
+            className='w-full border-b-2 border-solid border-gray-200 dark:border-purple-800'
+          >
+            {ComponentElem}
+          </div>
+        )
+      })}
+    </>
+  )
+
   return (
     <Card className='w-full max-w-sm dark:border-1 dark:border-solid dark:border-purple-900 dark:text-gray-200'>
-      <CardHeader>Question Form {id}</CardHeader>
+      {/* <CardHeader>Question Form {id}</CardHeader> */}
       <CardBody>
         <Form
           className='w-full flex flex-col gap-4'
@@ -52,7 +71,9 @@ export default function QuestionForm(props: PropsType) {
           onSubmit={handleSubmit}
           validationBehavior='aria'
         >
-          <div className='w-full border-b-2 border-solid border-gray-200 dark:border-purple-800'>
+          {/* 遍历组件 */}
+          {ComponentListElem}
+          {/* <div className='w-full border-b-2 border-solid border-gray-200 dark:border-purple-800'>
             <QuestionInput
               fe_id='c1'
               props={{ title: '你的姓名', placeholder: '请输入姓名...' }}
@@ -71,7 +92,7 @@ export default function QuestionForm(props: PropsType) {
                 isVertical: false
               }}
             />
-          </div>
+          </div> */}
           <div className='w-full'>
             <Button
               className='w-full'

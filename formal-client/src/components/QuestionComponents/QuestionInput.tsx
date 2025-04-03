@@ -1,6 +1,6 @@
 'use client'
 
-interface PropsType {
+interface QuestionInputPropsType {
   fe_id: string
   props: {
     title: string
@@ -8,7 +8,10 @@ interface PropsType {
   }
 }
 
-export default function QuestionInput({ fe_id, props }: PropsType) {
+export default function QuestionInput({
+  fe_id,
+  props
+}: QuestionInputPropsType) {
   const { title, placeholder = '' } = props
   return (
     <>

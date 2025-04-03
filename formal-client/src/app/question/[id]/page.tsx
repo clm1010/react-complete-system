@@ -94,15 +94,18 @@ export default async function Page(props: PageProps) {
   }
   return (
     <div className='flex flex-col items-center justify-center h-full dark:text-gray-200'>
-      <p>Question {questionId}</p>
+      {/* <p>Question {questionId}</p> */}
       <QuestionForm id={questionId} componentList={componentList} />
     </div>
   )
 }
 
+/**
+ * @description 获取问卷
+ */
 async function getQuestion(id: string): Promise<QuestionType> {
   const resData = await questionService.getQuestionById(id)
-  console.log(resData, 'getQuestion')
+  // console.log(resData, 'getQuestion')
   return {
     errno: resData.errno,
     data: resData.data

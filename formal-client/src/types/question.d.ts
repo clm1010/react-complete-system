@@ -15,3 +15,14 @@ export interface AnswerType {
 export interface ResDataType {
   [key: string]: any
 }
+
+/**
+ * @description 组件信息类型
+ */
+interface ComponentInfoType {
+  fe_id: string
+  type: string
+  // title: string
+  isHidden: boolean
+  props: any
+}

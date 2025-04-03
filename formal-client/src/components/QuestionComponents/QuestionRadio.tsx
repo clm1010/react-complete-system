@@ -1,6 +1,6 @@
 'use client'
 
-interface PropsType {
+interface QuestionRadioPropsType {
   fe_id: string
   props: {
     title: string
@@ -13,7 +13,10 @@ interface PropsType {
   }
 }
 
-export default function QuestionRadio({ fe_id, props }: PropsType) {
+export default function QuestionRadio({
+  fe_id,
+  props
+}: QuestionRadioPropsType) {
   const { title, options = [], value, isVertical } = props
 
   let liClassName = ''
